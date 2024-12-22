@@ -1,11 +1,23 @@
 import React from "react";
 
-const NotificationsModal: React.FC = () => {
+type NotificationsModalProps = {
+  onClose: () => void;
+};
+
+const NotificationsModal: React.FC<NotificationsModalProps> = ({ onClose }) => {
   return (
-    <div className="modal">
-      <h2>Notifications</h2>
-      {/* Your modal content goes here */}
-    </div>
+    <>
+      {/* Backdrop */}
+      <div className="modal-backdrop" onClick={onClose}></div>
+      {/* Modal Content */}
+      <div className="modal-container">
+        <h2>Notifications</h2>
+        <p>This is where you can display notifications content.</p>
+        <button className="modal-close-button" onClick={onClose}>
+          Close
+        </button>
+      </div>
+    </>
   );
 };
 

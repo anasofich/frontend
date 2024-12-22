@@ -1,0 +1,207 @@
+.nav-items {
+  display: flex;
+  align-items: center;
+  font-size: var(--h4-size);
+  justify-content: space-between;
+  padding: 20px 30px 10px 30px;
+}
+
+.nav-items .left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.pagesButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--grey);
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 100px;
+  background-color: var(--light-grey);
+  transition: background-color 0.3s ease;
+}
+
+.nav-button.active {
+  background-color: var(--main-blue);
+  color: var(--white);
+}
+
+.nav-button:hover {
+  background-color: var(--blue);
+}
+
+.nav-button.active:hover {
+  background-color: var(--main-blue);
+}
+
+.nav-logo {
+  width: 42px;
+  height: auto;
+}
+
+.nav-items .right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button.nav-button {
+  padding: 10px;
+  border: none;
+  background-color: var(--white);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userInfo .userImage {
+  width: 42px;
+  height: auto;
+}
+
+.userInfo .userDetails .name {
+  font-family: var(--FigtreeSemibold) !important;
+  font-size: var(--h4-size);
+}
+
+.userInfo .userDetails .role {
+  color: var(--grey);
+}
+
+/*icons*/
+.nav-button.overview .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/overview.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.overview.active .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/overview-white.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.calendar .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/calendar.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.calendar.active .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/calendar-white.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.community .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/community.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.community.active .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/community-white.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.profile .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/user.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.profile.active .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/user-white.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.settings .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/settings.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.settings.active .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/settings-white.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.notifications .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/notifications.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.notifications.active .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/notifications-white.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.chat .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/chat.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav-button.chat.active .nav-icon {
+  width: 21px;
+  height: 21px;
+  background: url(./media/graphics/png/chat-white.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

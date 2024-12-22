@@ -1,11 +1,23 @@
 import React from "react";
 
-const ChatModal: React.FC = () => {
+type ChatModalProps = {
+  onClose: () => void;
+};
+
+const ChatModal: React.FC<ChatModalProps> = ({ onClose }) => {
   return (
-    <div className="modal">
-      <h2>Chat</h2>
-      {/* Your modal content goes here */}
-    </div>
+    <>
+      {/* Backdrop */}
+      <div className="modal-backdrop" onClick={onClose}></div>
+      {/* Modal Content */}
+      <div className="modal-container">
+        <h2>Chat</h2>
+        <p>This is where the chat content will go.</p>
+        <button className="modal-close-button" onClick={onClose}>
+          Close
+        </button>
+      </div>
+    </>
   );
 };
 

@@ -1,12 +1,28 @@
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --main-blue: #2055f0;
+  --black: #202124;
+  --grey: #898890;
+  --white: #ffffff;
+  --blue: #dee6fd;
+  --turquoise: #c2f2ee;
+  --green: #83c56b;
+  --light-green: #dcefd5;
+  --red: #f59393;
+  --light-red: #ffeded;
+  --light-grey: #f0eff4;
+  --light-blue: #f6f5fa;
+  --FigtreeMedium: FigtreeMedium;
+  --FigtreeSemibold: FigtreeSemibold;
+  --h1-size: 32px;
+  --h2-size: 24px;
+  --h3-size: 18px;
+  --h4-size: 16px;
+  --p-size: 14px;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  color: var(--black);
+  background: var(--light-blue);
 }
 
 /*
@@ -23,6 +39,7 @@ body {
   */
 * {
   margin: 0;
+  font-family: FigtreeMedium;
 }
 
 /*
