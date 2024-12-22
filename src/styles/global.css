@@ -82,6 +82,10 @@ select {
   font: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 /*
     8. Avoid text overflows
   */

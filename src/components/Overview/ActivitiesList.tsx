@@ -3,18 +3,25 @@ import ActivityElement from "./ActivityElement";
 
 interface ActivitiesListProps {
   activities: {
+    id: number;
     icon: string;
     day: string;
     time: string;
     title: string;
+    notes?: string;
+    status: string;
   }[];
 }
 
 const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
+  if (!activities || activities.length === 0) {
+    return <p>No upcoming activities</p>;
+  }
+
   return (
     <div className="activitiesList">
-      {activities.map((activity, index) => (
-        <ActivityElement key={index} icon={activity.icon} day={activity.day} time={activity.time} title={activity.title} />
+      {activities.map((activity) => (
+        <ActivityElement key={activity.id} {...activity} />
       ))}
       <div className="showAll">
         <h4>Show all</h4>

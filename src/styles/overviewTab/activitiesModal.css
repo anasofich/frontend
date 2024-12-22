@@ -1,0 +1,118 @@
+.activityModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.rectangularButton.close {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  justify-content: flex-end;
+}
+
+.activityModal .modalContent {
+  background: var(--light-blue);
+  padding: 80px;
+  border-radius: 15px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activityModal .activityDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activityModal .titleEdit {
+  display: flex;
+  gap: 15px;
+}
+
+.activityModal .titleEdit button {
+  border: none;
+  background-color: transparent;
+  color: var(--grey);
+}
+
+.activityModal .notes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activityModal .notesContent {
+  background-color: var(--white);
+  padding: 10px;
+  border-radius: 6px;
+  height: 115px;
+}
+
+button.rectangularButton {
+  display: flex;
+  gap: 6px;
+  background-color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  align-items: center;
+}
+
+.activityModal .modalActions,
+.activityModal .confirmationActions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rectangularButton.doneMessage {
+  display: flex;
+  gap: 6px;
+  background-color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.activityModal .closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.activityModal .deleteConfirmation {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activityModal .deletedModal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.activityModal .deletedModal button {
+  background-color: var(--light-grey);
+}

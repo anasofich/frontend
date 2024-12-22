@@ -33,17 +33,22 @@
 
 .overviewContent .bottom {
   margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  width: 100%;
 }
 
+/*upcoming activities*/
+
 .overviewContent .upcomingActivities {
-  background: linear-gradient(0deg, #f0eff4, #f0eff4),
-    radial-gradient(38.47% 22.36% at 77.09% 93.51%, rgba(32, 85, 240, 0.3) 0%, rgba(32, 85, 240, 0) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+  background: rgb(32, 85, 240);
+  background: radial-gradient(circle, rgba(32, 85, 240, 0.4) 0%, rgba(240, 239, 244, 1) 50%);
   display: flex;
   flex-direction: column;
   gap: 15px;
   padding: 15px;
   border-radius: 10px;
-  width: 440px;
+  width: 33%;
 }
 
 .overviewContent .activitiesList {
@@ -67,13 +72,13 @@
   align-items: center;
 }
 
-.overviewContent .activityElement .icon {
+.overviewContent .icon {
   background-color: var(--blue);
   padding: 17px;
   border-radius: 100px;
 }
 
-.overviewContent .activityElement .date {
+.date {
   background-color: var(--turquoise);
   width: fit-content;
   display: flex;
@@ -89,4 +94,123 @@
   background-color: var(--white);
   border-radius: 10px;
   padding: 15px 10px;
+}
+
+.showAll.lightBlue {
+  background-color: var(--light-blue);
+}
+
+/*favorites*/
+.overviewContent .favorites {
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  width: 33%;
+}
+
+.overviewContent .favorites .favoritesElementSmall {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--light-blue);
+  border-radius: 10px;
+}
+
+.overviewContent .favorites .favoritesElementSmall .left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.overviewContent .favorites .favoritesElementSmall .left p {
+  color: var(--grey);
+}
+
+.overviewContent .favorites .favoritesElementSmall .right {
+  display: flex;
+  gap: 5px;
+  color: var(--grey);
+}
+
+.overviewContent .favorites .bigElements {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.overviewContent .favorites .favoritesElementBig {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background-color: var(--light-blue);
+  border-radius: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.overviewContent .favorites .favoritesElementBig .title {
+  display: flex;
+  gap: 6px;
+}
+
+.overviewContent .favorites .favoritesElementBig .timeStamp {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  gap: 5px;
+}
+
+/*Right column*/
+.overviewContent .rightColumn {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.overviewContent .rightColumn .location {
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  height: 50%;
+}
+
+.overviewContent .rightColumn .post {
+  background-color: var(--blue);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  border-radius: 10px;
+  height: 50%;
+}
+
+.overviewContent .rightColumn .top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.overviewContent .rightColumn .bottom {
+  display: flex;
+  justify-content: end;
+}
+
+.mainButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 100px;
+  background-color: var(--main-blue);
+  border: none;
+  color: var(--white);
 }
