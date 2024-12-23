@@ -19,7 +19,7 @@ const Overview: React.FC = () => {
       day: "Tomorrow",
       time: "09:00",
       title: "Physical therapy",
-      notes: "Take 1 dose",
+      notes: "Come 15 minues earlier",
       status: "pending",
     },
     {
@@ -28,7 +28,7 @@ const Overview: React.FC = () => {
       day: "Nov 3",
       time: "8:30",
       title: "Breakfast",
-      notes: "Take 1 dose",
+      notes: "",
       status: "pending",
     },
     {
@@ -37,7 +37,7 @@ const Overview: React.FC = () => {
       day: "Nov 3",
       time: "13:00",
       title: "Take Citalopram",
-      notes: "Take 1 dose",
+      notes: "Take 1/2 a dose",
       status: "pending",
     },
   ];

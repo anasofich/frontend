@@ -116,3 +116,8 @@ button.rectangularButton {
 .activityModal .deletedModal button {
   background-color: var(--light-grey);
 }
+.activityModal .doneButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
