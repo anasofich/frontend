@@ -1,27 +1,3 @@
-* {
-  font-size: var(--p-size);
-}
-
-.overviewContent h1 {
-  font-size: var(--h1-size);
-  font-weight: unset;
-}
-
-.overviewContent h2 {
-  font-size: var(--h2-size);
-  font-weight: unset;
-}
-
-.overviewContent h3 {
-  font-size: var(--h3-size);
-  font-weight: unset;
-}
-
-.overviewContent h4 {
-  font-size: var(--h4-size);
-  font-weight: unset;
-}
-
 .overviewContent .top p {
   font-size: var(--h2-size);
 }

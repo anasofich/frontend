@@ -1,0 +1,31 @@
+.calendarTabContent {
+  padding: 30px;
+}
+
+.calendarTabContent .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendarTabContent .top .left {
+  display: flex;
+  gap: 540px;
+}
+
+.calendarTabContent .top .left .buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.calendarTabContent .icon {
+  background-color: var(--blue);
+  padding: 17px;
+  border-radius: 100px;
+  border: none;
+}
+
+.calendarTabContent .icon.right {
+  background-color: var(--main-blue);
+}

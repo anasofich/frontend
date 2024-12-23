@@ -1,0 +1,119 @@
+.addActivityModal,
+.confirmationModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.rectangularButton.close {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  justify-content: flex-end;
+}
+
+.addActivityModal .modalContent {
+  background: var(--light-blue);
+  padding: 80px;
+  border-radius: 15px;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addActivityModal .step1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addActivityModal .activityTypes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.activityType {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  width: max-content;
+}
+
+.activityType.selected {
+  background-color: var(--main-blue);
+  color: var(--white);
+}
+
+.addActivityModal .buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.addActivityModal .buttons button.disabled {
+  background-color: var(--light-grey);
+  pointer-events: none;
+}
+
+.addActivityModal .step2 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.addActivityModal .step2 .first {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addActivityModal .step2 .second {
+  display: flex;
+  gap: 15px;
+}
+
+.addActivityModal .step2 .second .left,
+.addActivityModal .step2 .second .right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.addActivityModal input,
+.addActivityModal textarea {
+  background-color: var(--white);
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.addActivityModal .step2 .third {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.confirmationModal .modalContent {
+  background: var(--light-blue);
+  padding: 80px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
