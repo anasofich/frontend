@@ -16,7 +16,12 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showDeletedModal, setShowDeletedModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [editData, setEditData] = useState({ title, notes });
+  const [editData, setEditData] = useState({
+    title,
+    notes,
+    Date,
+    time,
+  });
   const [showDoneElement, setShowDoneElement] = useState(status === "completed");
 
   // Handle updates to the activity
@@ -73,7 +78,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
             {!showDeleteConfirmation && status !== "completed" && (
               <div className="modalActions">
                 <button className="rectangularButton" onClick={() => setShowDeleteConfirmation(true)}>
-                  <p>Delete</p>
+                  <h4>Delete</h4>
                   <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M11.8921 11L15.7886 7.10351C15.9735 6.91891 16.0775 6.66841 16.0777 6.40712C16.078 6.14582 15.9744 5.89514 15.7898 5.71021C15.6052 5.52529 15.3547 5.42127 15.0934 5.42104C14.8321 5.42081 14.5814 5.52438 14.3965 5.70898L10.5 9.60547L6.60351 5.70898C6.41859 5.52406 6.16777 5.42017 5.90625 5.42017C5.64472 5.42017 5.39391 5.52406 5.20898 5.70898C5.02406 5.89391 4.92017 6.14472 4.92017 6.40625C4.92017 6.66777 5.02406 6.91859 5.20898 7.10351L9.10547 11L5.20898 14.8965C5.02406 15.0814 4.92017 15.3322 4.92017 15.5937C4.92017 15.8553 5.02406 16.1061 5.20898 16.291C5.39391 16.4759 5.64472 16.5798 5.90625 16.5798C6.16777 16.5798 6.41859 16.4759 6.60351 16.291L10.5 12.3945L14.3965 16.291C14.5814 16.4759 14.8322 16.5798 15.0937 16.5798C15.3553 16.5798 15.6061 16.4759 15.791 16.291C15.9759 16.1061 16.0798 15.8553 16.0798 15.5937C16.0798 15.3322 15.9759 15.0814 15.791 14.8965L11.8921 11Z"
@@ -83,7 +88,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
                 </button>
                 {status !== "completed" && (
                   <button className="rectangularButton" onClick={handleMarkAsCompleted}>
-                    <p>Mark as done</p>
+                    <h4>Mark as done</h4>
                     <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M17.5 6.625L8.75 15.375L4.375 11" stroke="#83C56B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
@@ -95,13 +100,13 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
         ) : (
           <div className="doneButtons">
             <div className="doneMessage rectangularButton">
-              <p>Done</p>
+              <h4>Done</h4>
               <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.5 6.625L8.75 15.375L4.375 11" stroke="#83C56B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <button className="rectangularButton close" onClick={onClose}>
-              <p>Close</p>
+              <h4>Close</h4>
               <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11.8921 11L15.7886 7.10351C15.9735 6.91891 16.0775 6.66841 16.0777 6.40712C16.078 6.14582 15.9744 5.89514 15.7898 5.71021C15.6052 5.52529 15.3547 5.42127 15.0934 5.42104C14.8321 5.42081 14.5814 5.52438 14.3965 5.70898L10.5 9.60547L6.60351 5.70898C6.41859 5.52406 6.16777 5.42017 5.90625 5.42017C5.64472 5.42017 5.39391 5.52406 5.20898 5.70898C5.02406 5.89391 4.92017 6.14472 4.92017 6.40625C4.92017 6.66777 5.02406 6.91859 5.20898 7.10351L9.10547 11L5.20898 14.8965C5.02406 15.0814 4.92017 15.3322 4.92017 15.5937C4.92017 15.8553 5.02406 16.1061 5.20898 16.291C5.39391 16.4759 5.64472 16.5798 5.90625 16.5798C6.16777 16.5798 6.41859 16.4759 6.60351 16.291L10.5 12.3945L14.3965 16.291C14.5814 16.4759 14.8322 16.5798 15.0937 16.5798C15.3553 16.5798 15.6061 16.4759 15.791 16.291C15.9759 16.1061 16.0798 15.8553 16.0798 15.5937C16.0798 15.3322 15.9759 15.0814 15.791 14.8965L11.8921 11Z"
@@ -126,10 +131,10 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
                   />
                 </svg>
 
-                <p>Go back</p>
+                <h4>Go back</h4>
               </button>
               <button className="rectangularButton" onClick={handleDelete}>
-                <p>Delete</p>
+                <h4>Delete</h4>
                 <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M11.8921 11L15.7886 7.10351C15.9735 6.91891 16.0775 6.66841 16.0777 6.40712C16.078 6.14582 15.9744 5.89514 15.7898 5.71021C15.6052 5.52529 15.3547 5.42127 15.0934 5.42104C14.8321 5.42081 14.5814 5.52438 14.3965 5.70898L10.5 9.60547L6.60351 5.70898C6.41859 5.52406 6.16777 5.42017 5.90625 5.42017C5.64472 5.42017 5.39391 5.52406 5.20898 5.70898C5.02406 5.89391 4.92017 6.14472 4.92017 6.40625C4.92017 6.66777 5.02406 6.91859 5.20898 7.10351L9.10547 11L5.20898 14.8965C5.02406 15.0814 4.92017 15.3322 4.92017 15.5937C4.92017 15.8553 5.02406 16.1061 5.20898 16.291C5.39391 16.4759 5.64472 16.5798 5.90625 16.5798C6.16777 16.5798 6.41859 16.4759 6.60351 16.291L10.5 12.3945L14.3965 16.291C14.5814 16.4759 14.8322 16.5798 15.0937 16.5798C15.3553 16.5798 15.6061 16.4759 15.791 16.291C15.9759 16.1061 16.0798 15.8553 16.0798 15.5937C16.0798 15.3322 15.9759 15.0814 15.791 14.8965L11.8921 11Z"
@@ -147,7 +152,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
             <h4>Request sent</h4>
             <p>A member of the staff will review your request</p>
             <button className="rectangularButton" onClick={onClose}>
-              <p>Close</p>
+              <h4>Close</h4>
               <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M11.8921 11L15.7886 7.10351C15.9735 6.91891 16.0775 6.66841 16.0777 6.40712C16.078 6.14582 15.9744 5.89514 15.7898 5.71021C15.6052 5.52529 15.3547 5.42127 15.0934 5.42104C14.8321 5.42081 14.5814 5.52438 14.3965 5.70898L10.5 9.60547L6.60351 5.70898C6.41859 5.52406 6.16777 5.42017 5.90625 5.42017C5.64472 5.42017 5.39391 5.52406 5.20898 5.70898C5.02406 5.89391 4.92017 6.14472 4.92017 6.40625C4.92017 6.66777 5.02406 6.91859 5.20898 7.10351L9.10547 11L5.20898 14.8965C5.02406 15.0814 4.92017 15.3322 4.92017 15.5937C4.92017 15.8553 5.02406 16.1061 5.20898 16.291C5.39391 16.4759 5.64472 16.5798 5.90625 16.5798C6.16777 16.5798 6.41859 16.4759 6.60351 16.291L10.5 12.3945L14.3965 16.291C14.5814 16.4759 14.8322 16.5798 15.0937 16.5798C15.3553 16.5798 15.6061 16.4759 15.791 16.291C15.9759 16.1061 16.0798 15.8553 16.0798 15.5937C16.0798 15.3322 15.9759 15.0814 15.791 14.8965L11.8921 11Z"
@@ -161,16 +166,42 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
         {/* Edit Modal */}
         {showEditModal && (
           <div className="editModal">
-            <h4>Edit Activity</h4>
-            <input type="text" value={editData.title} onChange={(e) => setEditData({ ...editData, title: e.target.value })} placeholder="Edit title" />
-            <textarea value={editData.notes} onChange={(e) => setEditData({ ...editData, notes: e.target.value })} placeholder="Edit notes"></textarea>
-            <div className="editActions">
-              <button className="rectangularButton" onClick={() => setShowEditModal(false)}>
-                Cancel
-              </button>
-              <button className="rectangularButton" onClick={handleSaveEdit}>
-                Save
-              </button>
+            <div className="modalContent">
+              <h3>Edit Activity</h3>
+              <input type="text" value={editData.title} onChange={(e) => setEditData({ ...editData, title: e.target.value })} placeholder="Edit title" />
+              <textarea value={editData.notes} onChange={(e) => setEditData({ ...editData, notes: e.target.value })} placeholder="Edit notes"></textarea>
+
+              {/* Date Field */}
+              <div className="dateTimeContainer">
+                <div className="dateField">
+                  <h4>Date</h4>
+                  <input type="date" value={editData.date} onChange={(e) => setEditData({ ...editData, date: e.target.value })} />
+                </div>
+
+                {/* Time Field */}
+                <div className="timeField">
+                  <h4>Time</h4>
+                  <input type="time" value={editData.time} onChange={(e) => setEditData({ ...editData, time: e.target.value })} />
+                </div>
+              </div>
+
+              <div className="modalActions">
+                <button className="rectangularButton" onClick={() => setShowEditModal(false)}>
+                  <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M11.8921 11L15.7886 7.10351C15.9735 6.91891 16.0775 6.66841 16.0777 6.40712C16.078 6.14582 15.9744 5.89514 15.7898 5.71021C15.6052 5.52529 15.3547 5.42127 15.0934 5.42104C14.8321 5.42081 14.5814 5.52438 14.3965 5.70898L10.5 9.60547L6.60351 5.70898C6.41859 5.52406 6.16777 5.42017 5.90625 5.42017C5.64472 5.42017 5.39391 5.52406 5.20898 5.70898C5.02406 5.89391 4.92017 6.14472 4.92017 6.40625C4.92017 6.66777 5.02406 6.91859 5.20898 7.10351L9.10547 11L5.20898 14.8965C5.02406 15.0814 4.92017 15.3322 4.92017 15.5937C4.92017 15.8553 5.02406 16.1061 5.20898 16.291C5.39391 16.4759 5.64472 16.5798 5.90625 16.5798C6.16777 16.5798 6.41859 16.4759 6.60351 16.291L10.5 12.3945L14.3965 16.291C14.5814 16.4759 14.8322 16.5798 15.0937 16.5798C15.3553 16.5798 15.6061 16.4759 15.791 16.291C15.9759 16.1061 16.0798 15.8553 16.0798 15.5937C16.0798 15.3322 15.9759 15.0814 15.791 14.8965L11.8921 11Z"
+                      fill="#F59393"
+                    />
+                  </svg>
+                  <h4>Cancel</h4>
+                </button>
+                <button className="rectangularButton" onClick={handleSaveEdit}>
+                  <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.5 6.625L8.75 15.375L4.375 11" stroke="#83C56B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <h4>Save</h4>
+                </button>
+              </div>
             </div>
           </div>
         )}

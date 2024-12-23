@@ -1,4 +1,5 @@
-.activityModal {
+.activityModal,
+.editModal {
   position: fixed;
   top: 0;
   left: 0;
@@ -18,7 +19,8 @@ button.rectangularButton.close {
   justify-content: flex-end;
 }
 
-.activityModal .modalContent {
+.activityModal .modalContent,
+.editModal .modalContent {
   background: var(--light-blue);
   padding: 80px;
   border-radius: 15px;
@@ -120,4 +122,23 @@ button.rectangularButton {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.editModal input,
+.editModal textarea {
+  background-color: var(--white);
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.editModal .dateTimeContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.editModal .dateField,
+.timeField {
+  flex: 1;
 }
