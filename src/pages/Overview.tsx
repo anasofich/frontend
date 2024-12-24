@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ActivitiesList from "../components/Overview/ActivitiesList";
+import { fetchUserActivities } from "../services/api";
 
 const Overview: React.FC = () => {
+  const [activities, setActivities] = React.useState<any[]>([]);
+  const userId = "676a5112c2fadf3c1e98793c";
   // Dummy data for activities
-  const activities = [
+  /* const activities = [
     {
       id: 1,
       icon: "./media/graphics/svg/medicine.svg",
@@ -49,7 +52,20 @@ const Overview: React.FC = () => {
       notes: "Take 1/2 a dose",
       status: "pending",
     },
-  ];
+  ]; */
+
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        const data = await fetchUserActivities(userId);
+        setActivities(data);
+      } catch (error) {
+        console.error("Error fetching activities:", error);
+      }
+    };
+
+    fetchActivities();
+  }, [userId]);
 
   return (
     <div className="overviewContent" style={{ padding: "30px" }}>
