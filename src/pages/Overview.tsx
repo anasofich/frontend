@@ -6,7 +6,7 @@ const Overview: React.FC = () => {
   const activities = [
     {
       id: 1,
-      icon: "./media/graphics/svg/Medicine.svg",
+      icon: "./media/graphics/svg/medicine.svg",
       day: "Today",
       time: "12:30",
       title: "Take Naloxone",
@@ -33,7 +33,16 @@ const Overview: React.FC = () => {
     },
     {
       id: 4,
-      icon: "./media/graphics/svg/Medicine.svg",
+      icon: "./media/graphics/svg/medicine.svg",
+      day: "Nov 3",
+      time: "13:00",
+      title: "Take Citalopram",
+      notes: "Take 1/2 a dose",
+      status: "pending",
+    },
+    {
+      id: 4,
+      icon: "./media/graphics/svg/medicine.svg",
       day: "Nov 3",
       time: "13:00",
       title: "Take Citalopram",
@@ -78,7 +87,7 @@ const Overview: React.FC = () => {
           <div className="favoritesElementSmall">
             <div className="left">
               <div className="icon">
-                <img src="./media/graphics/svg/Medicine.svg" alt="icon"></img>
+                <img src="./media/graphics/svg/medicine.svg" alt="icon"></img>
               </div>
               <div className="info">
                 <h4>Medicines</h4>
@@ -98,7 +107,7 @@ const Overview: React.FC = () => {
           <div className="bigElements">
             <div className="favoritesElementBig">
               <div className="title">
-                <img src="./media/graphics/svg/food.svg" alt="icon"></img>
+                <img src="./media/graphics/svg/toilet.svg" alt="icon"></img>
                 <p>Bowel movement</p>
               </div>
               <h1>2</h1>
@@ -114,7 +123,7 @@ const Overview: React.FC = () => {
             </div>
             <div className="favoritesElementBig">
               <div className="title">
-                <img src="./media/graphics/svg/food.svg" alt="icon"></img>
+                <img src="./media/graphics/svg/heart.svg" alt="icon"></img>
                 <p>Heart rate</p>
               </div>
               <h1>60</h1>
@@ -132,6 +141,7 @@ const Overview: React.FC = () => {
               </div>
             </div>
           </div>
+
           <div className="showAll lightBlue">
             <h4>Show all</h4>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -1,9 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
-interface ActivityFormProps {
-  onSubmit: (activity: { id: number; icon: string; day: string; time: string; title: string; notes?: string; status: string }) => void;
-}
-
 // Main Calendar Component
 const Calendar: React.FC = () => {
   const [isAddActivityModalOpen, setAddActivityModalOpen] = useState(false);

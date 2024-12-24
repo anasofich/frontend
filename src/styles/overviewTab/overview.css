@@ -25,6 +25,8 @@
   padding: 15px;
   border-radius: 10px;
   width: 33%;
+  height: 70vh;
+  overflow-y: scroll;
 }
 
 .overviewContent .activitiesList {
@@ -85,6 +87,31 @@
   padding: 15px;
   border-radius: 10px;
   width: 33%;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.overviewContent .favorites::-webkit-scrollbar,
+.overviewContent .upcomingActivities::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.overviewContent .favorites::-webkit-scrollbar-track,
+.overviewContent .upcomingActivities::-webkit-scrollbar {
+  background: var(--light-grey);
+  border-radius: 4px;
+}
+
+.overviewContent .favorites::-webkit-scrollbar-thumb,
+.overviewContent .upcomingActivities::-webkit-scrollbar-thumb {
+  background: rgb(206, 209, 225);
+  border-radius: 4px;
+}
+
+.overviewContent .favorites::-webkit-scrollbar-thumb:hover,
+.overviewContent .upcomingActivities::-webkit-scrollbar-thumb:hover {
+  background: var(--grey);
 }
 
 .overviewContent .favorites .favoritesElementSmall {

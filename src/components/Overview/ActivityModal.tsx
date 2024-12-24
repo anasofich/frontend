@@ -19,8 +19,8 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
   const [editData, setEditData] = useState({
     title,
     notes,
-    Date,
-    time,
+    day,
+    time: "",
   });
   const [showDoneElement, setShowDoneElement] = useState(status === "completed");
 
@@ -175,7 +175,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
               <div className="dateTimeContainer">
                 <div className="dateField">
                   <h4>Date</h4>
-                  <input type="date" value={editData.date} onChange={(e) => setEditData({ ...editData, date: e.target.value })} />
+                  <input type="date" value={editData.day} onChange={(e) => setEditData({ ...editData, day: e.target.value })} />
                 </div>
 
                 {/* Time Field */}

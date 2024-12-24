@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { openNotificationsModal, openChatModal } from "../../store";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 const NavBar: React.FC = () => {
   const dispatch = useDispatch();
+  const [activeLink, setActiveLink] = useState<string>(useLocation().pathname);
   const isNotificationsOpen = useSelector((state: RootState) => state.modal.isNotificationsOpen);
   const isChatOpen = useSelector((state: RootState) => state.modal.isChatOpen);
+
+  const handleNavClick = (path: string) => {
+    setActiveLink(path);
+  };
 
   console.log("Notifications Open:", isNotificationsOpen);
   console.log("Chat Open:", isChatOpen);
@@ -19,23 +24,23 @@ const NavBar: React.FC = () => {
         <div className="left">
           <img src="media/graphics/svg/logo.svg" alt="Logo" className="nav-logo" />
           <div className="pagesButtons">
-            <Link to="/" className="nav-button overview active">
+            <Link to="/" className={`nav-button overview ${activeLink === "/" ? "active" : ""}`} onClick={() => handleNavClick("/")}>
               <div className="nav-icon"></div>
               Overview
             </Link>
-            <Link to="/calendar" className="nav-button calendar">
+            <Link to="/calendar" className={`nav-button calendar ${activeLink === "/calendar" ? "active" : ""}`} onClick={() => handleNavClick("/calendar")}>
               <div className="nav-icon"></div>
               Calendar
             </Link>
-            <Link to="/community" className="nav-button community">
+            <Link to="/community" className={`nav-button community ${activeLink === "/community" ? "active" : ""}`} onClick={() => handleNavClick("/community")}>
               <div className="nav-icon"></div>
               Community
             </Link>
-            <Link to="/profile" className="nav-button profile">
+            <Link to="/profile" className={`nav-button profile ${activeLink === "/profile" ? "active" : ""}`} onClick={() => handleNavClick("/profile")}>
               <div className="nav-icon"></div>
               Profile
             </Link>
-            <Link to="/settings" className="nav-button settings">
+            <Link to="/settings" className={`nav-button settings ${activeLink === "/settings" ? "active" : ""}`} onClick={() => handleNavClick("/settings")}>
               <div className="nav-icon"></div>
               Settings
             </Link>
