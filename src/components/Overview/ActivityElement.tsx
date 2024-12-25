@@ -4,14 +4,14 @@ import ActivityModal from "./ActivityModal";
 interface ActivityElementProps {
   id: string; // Unique identifier
   icon: string; // Path to the icon
-  day: string; // Day (e.g., "Today")
+  date: string; // Day (e.g., "Today")
   time: string; // Time (e.g., "12:30")
   title: string; // Activity title (e.g., "Take Naloxone")
   notes?: string; // Additional notes (optional)
   status: string; // Status of the activity (e.g., "pending")
 }
 
-const ActivityElement: React.FC<ActivityElementProps> = ({ id, icon, day, time, title, notes, status }) => {
+const ActivityElement: React.FC<ActivityElementProps> = ({ id, icon, date, time, title, notes, status }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Define handlers for modal actions
@@ -38,7 +38,7 @@ const ActivityElement: React.FC<ActivityElementProps> = ({ id, icon, day, time, 
           </div>
           <div className="content">
             <div className="date">
-              <span className="activityDay">{day}</span>
+              <span className="activityDay">{date}</span>
               <span className="activityTime">{time}</span>
             </div>
             <h4 className="activityTitle">{title}</h4>
@@ -54,7 +54,7 @@ const ActivityElement: React.FC<ActivityElementProps> = ({ id, icon, day, time, 
       {isModalOpen && (
         <ActivityModal
           id={id} // Pass id as string
-          day={day}
+          date={date}
           time={time}
           title={title}
           notes={notes ?? ""}

@@ -4,7 +4,7 @@ import { fetchUserActivities } from "../services/api";
 
 const Overview: React.FC = () => {
   const [activities, setActivities] = React.useState<any[]>([]);
-  const userId = "676a4a8ac2fadf3c1e987921";
+  const userId = "676a5112c2fadf3c1e98793c";
   // Dummy data for activities
   /* const activities = [
     {
@@ -71,9 +71,40 @@ const Overview: React.FC = () => {
     const fetchActivities = async () => {
       try {
         const data = await fetchUserActivities(userId);
+
+        // Get today's and tomorrow's dates
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+
+        const formatDate = (dateString: string) => {
+          const activityDate = new Date(dateString);
+          if (activityDate.toDateString() === today.toDateString()) {
+            return "Today";
+          }
+          if (activityDate.toDateString() === tomorrow.toDateString()) {
+            return "Tomorrow";
+          }
+          return activityDate.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          });
+        };
+
+        const formatTime24Hour = (dateString: string) => {
+          const activityDate = new Date(dateString);
+          return activityDate.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          });
+        };
+
         const enrichedData = data.map((activity: any) => ({
           ...activity,
           icon: typeToIconMap[activity.type] || "./media/graphics/svg/medicine.svg",
+          date: formatDate(activity.date),
+          time: formatTime24Hour(activity.date),
         }));
         setActivities(enrichedData);
       } catch (error) {

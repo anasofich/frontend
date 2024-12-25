@@ -7,8 +7,8 @@ import Community from "../pages/Community";
 import Profile from "../pages/Profile";
 import Settings from "../pages/Settings";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../store";
-import { closeNotificationsModal, closeChatModal } from "../store";
+import { RootState } from "../state/store";
+import { closeNotificationsModal, closeChatModal } from "../state/slices/modalSlice";
 import NotificationsModal from "../components/Navigation/NotificationsModal";
 import ChatModal from "../components/Navigation/ChatModal";
 

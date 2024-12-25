@@ -1,11 +1,18 @@
-import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+interface ModalState {
+  isNotificationsOpen: boolean;
+  isChatOpen: boolean;
+}
+
+const initialState: ModalState = {
+  isNotificationsOpen: false,
+  isChatOpen: false,
+};
 
 const modalSlice = createSlice({
   name: "modal",
-  initialState: {
-    isNotificationsOpen: false,
-    isChatOpen: false,
-  },
+  initialState,
   reducers: {
     openNotificationsModal: (state) => {
       state.isNotificationsOpen = true;
@@ -23,13 +30,4 @@ const modalSlice = createSlice({
 });
 
 export const { openNotificationsModal, closeNotificationsModal, openChatModal, closeChatModal } = modalSlice.actions;
-
-export const store = configureStore({
-  reducer: {
-    modal: modalSlice.reducer,
-    // other reducers
-  },
-});
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export default modalSlice.reducer;

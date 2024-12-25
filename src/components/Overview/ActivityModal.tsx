@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 interface ActivityModalProps {
   id: string; // Unique identifier for the activity
-  day: string;
+  date: string;
   time: string;
   title: string;
   notes: string;
@@ -12,14 +12,14 @@ interface ActivityModalProps {
   onDeleteActivity: (id: string) => void; // Function to delete the activity
 }
 
-const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, notes, status, onClose, onUpdateActivity, onDeleteActivity }) => {
+const ActivityModal: React.FC<ActivityModalProps> = ({ id, date, time, title, notes, status, onClose, onUpdateActivity, onDeleteActivity }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showDeletedModal, setShowDeletedModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editData, setEditData] = useState({
     title,
     notes,
-    day,
+    date,
     time: "",
   });
   const [showDoneElement, setShowDoneElement] = useState(status === "completed");
@@ -60,7 +60,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
             <button onClick={() => setShowEditModal(true)}>Edit</button>
           </div>
           <div className="date">
-            <p>{day}</p>
+            <p>{date}</p>
             <p>{time}</p>
           </div>
           <div className="notes">
@@ -175,7 +175,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, not
               <div className="dateTimeContainer">
                 <div className="dateField">
                   <h4>Date</h4>
-                  <input type="date" value={editData.day} onChange={(e) => setEditData({ ...editData, day: e.target.value })} />
+                  <input type="date" value={editData.date} onChange={(e) => setEditData({ ...editData, date: e.target.value })} />
                 </div>
 
                 {/* Time Field */}

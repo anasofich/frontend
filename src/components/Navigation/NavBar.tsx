@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { openNotificationsModal, openChatModal } from "../../store";
+import { openNotificationsModal, openChatModal } from "../../state/slices/modalSlice";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { RootState } from "../../state/store";
+import { selectUser } from "../../state/slices/userSlice";
 
 const NavBar: React.FC = () => {
   const dispatch = useDispatch();
   const [activeLink, setActiveLink] = useState<string>(useLocation().pathname);
   const isNotificationsOpen = useSelector((state: RootState) => state.modal.isNotificationsOpen);
   const isChatOpen = useSelector((state: RootState) => state.modal.isChatOpen);
+  const user = useSelector(selectUser);
 
   const handleNavClick = (path: string) => {
     setActiveLink(path);
@@ -67,11 +69,11 @@ const NavBar: React.FC = () => {
           </button>
           <div className="userInfo">
             <div className="userImage">
-              <img src="./media/images/png/maria-pp.png" alt="User"></img>
+              <img src={user.photo} alt="User"></img>
             </div>
             <div className="userDetails">
-              <p className="name">Maria Alba</p>
-              <p className="role">Resident</p>
+              <p className="name">{user.fullName}</p>
+              <p className="role">{user.role}</p>
             </div>
           </div>
         </div>

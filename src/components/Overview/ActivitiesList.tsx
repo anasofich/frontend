@@ -5,7 +5,7 @@ interface ActivitiesListProps {
   activities: {
     id: string;
     icon: string;
-    day: string;
+    date: string;
     time: string;
     title: string;
     notes?: string;
