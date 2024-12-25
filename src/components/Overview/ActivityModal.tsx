@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
 interface ActivityModalProps {
-  id: number; // Unique identifier for the activity
+  id: string; // Unique identifier for the activity
   day: string;
   time: string;
   title: string;
   notes: string;
   status: string; // Added for status management
   onClose: () => void;
-  onUpdateActivity: (id: number, updatedData: { title?: string; notes?: string; status?: string }) => void; // Function to update the activity
-  onDeleteActivity: (id: number) => void; // Function to delete the activity
+  onUpdateActivity: (id: string, updatedData: { title?: string; notes?: string; status?: string }) => void; // Function to update the activity
+  onDeleteActivity: (id: string) => void; // Function to delete the activity
 }
 
 const ActivityModal: React.FC<ActivityModalProps> = ({ id, day, time, title, notes, status, onClose, onUpdateActivity, onDeleteActivity }) => {

@@ -59,6 +59,25 @@ const Calendar: React.FC = () => {
 };
 
 // Modal Component for Adding Activity
+interface ActivityType {
+  key: string;
+  label: string;
+  icon: string;
+}
+
+const ACTIVITY_TYPES: ActivityType[] = [
+  { key: "food", label: "Food", icon: "media/graphics/svg/food.svg" },
+  { key: "appointment", label: "Appointment", icon: "media/graphics/svg/appointment.svg" },
+  { key: "blood-cell", label: "Blood cell", icon: "media/graphics/svg/blood-cell.svg" },
+  { key: "glucose", label: "Glucose", icon: "media/graphics/svg/glucose.svg" },
+  { key: "heart", label: "Heart", icon: "media/graphics/svg/heart.svg" },
+  { key: "medicine", label: "Medicine", icon: "media/graphics/svg/medicine.svg" },
+  { key: "toilet", label: "Bowel movement", icon: "media/graphics/svg/toilet.svg" },
+  { key: "water", label: "Water", icon: "media/graphics/svg/water.svg" },
+  { key: "weight", label: "Weight", icon: "media/graphics/svg/weight.svg" },
+  { key: "exercise", label: "Exercise", icon: "media/graphics/svg/exercise.svg" },
+];
+
 const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = ({ close, onSubmit }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -109,6 +128,16 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
             <div className="step1">
               <h3>What kind of activity do you want to add?</h3>
               <div className="activityTypes">
+                {ACTIVITY_TYPES.map((type) => (
+                  <button type="button" className={`activityType ${formData.activityType === type.key ? "selected" : ""}`} onClick={() => setFormData({ ...formData, activityType: type.key })}>
+                    <div className="icon">
+                      <img src={type.icon} alt={type.label} />
+                    </div>
+                    <h4>{type.label}</h4>
+                  </button>
+                ))}
+              </div>
+              {/* <div className="activityTypes">
                 <button type="button" className={`activityType ${formData.activityType === "food" ? "selected" : ""}`} onClick={() => setFormData({ ...formData, activityType: "food" })}>
                   <div className="icon">
                     <img src="media/graphics/svg/food.svg" alt="icon" />
@@ -121,7 +150,7 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
                   </div>
                   <h4>Appointment</h4>
                 </button>
-              </div>
+              </div> */}
               <div className="buttons">
                 <button type="button" className={`mainButton ${formData.activityType ? "" : "disabled"}`} onClick={handleNext}>
                   <h4>Next</h4>

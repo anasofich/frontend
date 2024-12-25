@@ -4,7 +4,7 @@ import { fetchUserActivities } from "../services/api";
 
 const Overview: React.FC = () => {
   const [activities, setActivities] = React.useState<any[]>([]);
-  const userId = "676a5112c2fadf3c1e98793c";
+  const userId = "676a4a8ac2fadf3c1e987921";
   // Dummy data for activities
   /* const activities = [
     {
@@ -54,11 +54,28 @@ const Overview: React.FC = () => {
     },
   ]; */
 
+  const typeToIconMap: { [key: string]: string } = {
+    appointment: "./media/graphics/svg/appointment.svg",
+    bloodCell: "./media/graphics/svg/blood-cell.svg",
+    food: "./media/graphics/svg/food.svg",
+    glucose: "./media/graphics/svg/glucose.svg",
+    heart: "./media/graphics/svg/heart.svg",
+    medicine: "./media/graphics/svg/medicine.svg",
+    toilet: "./media/graphics/svg/toilet.svg",
+    water: "./media/graphics/svg/water.svg",
+    weight: "./media/graphics/svg/weight.svg",
+    exercise: "./media/graphics/svg/exercise.svg",
+  };
+
   useEffect(() => {
     const fetchActivities = async () => {
       try {
         const data = await fetchUserActivities(userId);
-        setActivities(data);
+        const enrichedData = data.map((activity: any) => ({
+          ...activity,
+          icon: typeToIconMap[activity.type] || "./media/graphics/svg/medicine.svg",
+        }));
+        setActivities(enrichedData);
       } catch (error) {
         console.error("Error fetching activities:", error);
       }

@@ -21,7 +21,7 @@ button.rectangularButton.close {
 
 .addActivityModal .modalContent {
   background: var(--light-blue);
-  padding: 80px;
+  padding: 60px;
   border-radius: 15px;
   width: 800px;
   display: flex;
@@ -39,6 +39,30 @@ button.rectangularButton.close {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  height: 52vh;
+  overflow-y: scroll;
+  background-color: var(--light-grey);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.addActivityModal .activityTypes::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.addActivityModal .activityTypes::-webkit-scrollbar-track {
+  background: var(--light-grey);
+  border-radius: 4px;
+}
+
+.addActivityModal .activityTypes::-webkit-scrollbar-thumb {
+  background: rgb(206, 209, 225);
+  border-radius: 4px;
+}
+
+.addActivityModal .activityTypes::-webkit-scrollbar-thumb:hover {
+  background: var(--grey);
 }
 
 .activityType {

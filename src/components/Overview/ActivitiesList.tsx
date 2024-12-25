@@ -3,7 +3,7 @@ import ActivityElement from "./ActivityElement";
 
 interface ActivitiesListProps {
   activities: {
-    id: number;
+    id: string;
     icon: string;
     day: string;
     time: string;

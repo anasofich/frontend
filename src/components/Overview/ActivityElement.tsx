@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ActivityModal from "./ActivityModal";
 
 interface ActivityElementProps {
-  id: number; // Unique identifier
+  id: string; // Unique identifier
   icon: string; // Path to the icon
   day: string; // Day (e.g., "Today")
   time: string; // Time (e.g., "12:30")
@@ -15,12 +15,12 @@ const ActivityElement: React.FC<ActivityElementProps> = ({ id, icon, day, time, 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Define handlers for modal actions
-  const handleUpdateActivity = (id: number, updatedData: { title?: string; notes?: string; status?: string }) => {
+  const handleUpdateActivity = (id: string, updatedData: { title?: string; notes?: string; status?: string }) => {
     console.log("Updating activity:", id, updatedData);
     // Implement the logic to update the activity
   };
 
-  const handleDeleteActivity = (id: number) => {
+  const handleDeleteActivity = (id: string) => {
     console.log("Deleting activity:", id);
     // Implement the logic to delete the activity
   };
@@ -31,10 +31,10 @@ const ActivityElement: React.FC<ActivityElementProps> = ({ id, icon, day, time, 
 
   return (
     <div>
-      <div className="activityElement" onClick={handleOpenModal} style={{ cursor: "pointer" }}>
+      <div className="activityElement" key={id} onClick={handleOpenModal} style={{ cursor: "pointer" }}>
         <div className="left">
           <div className="icon">
-            <img src={icon} alt="icon" />
+            <img src={icon} alt={`${title} icon`} />
           </div>
           <div className="content">
             <div className="date">
