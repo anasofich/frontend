@@ -43,6 +43,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, origi
     try {
       await updateActivity(_id, editData);
       onUpdateActivity(_id, editData);
+      setEditData(editData);
       setShowEditModal(false);
       console.log("Activity updated:", _id, editData);
     } catch (error) {
@@ -66,7 +67,13 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, origi
   return (
     <div className="activityModal">
       <div className="modalContent">
-        <button className="rectangularButton close" onClick={onClose}>
+        <button
+          className="rectangularButton close"
+          onClick={() => {
+            onClose();
+            window.location.reload();
+          }}
+        >
           <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M11.8921 10.5L15.7886 6.60351C15.9735 6.41891 16.0775 6.16841 16.0777 5.90712C16.078 5.64582 15.9744 5.39514 15.7898 5.21021C15.6052 5.02529 15.3547 4.92127 15.0934 4.92104C14.8321 4.92081 14.5814 5.02438 14.3965 5.20898L10.5 9.10547L6.60351 5.20898C6.41859 5.02406 6.16777 4.92017 5.90625 4.92017C5.64472 4.92017 5.39391 5.02406 5.20898 5.20898C5.02406 5.39391 4.92017 5.64472 4.92017 5.90625C4.92017 6.16777 5.02406 6.41859 5.20898 6.60351L9.10547 10.5L5.20898 14.3965C5.02406 14.5814 4.92017 14.8322 4.92017 15.0937C4.92017 15.3553 5.02406 15.6061 5.20898 15.791C5.39391 15.9759 5.64472 16.0798 5.90625 16.0798C6.16777 16.0798 6.41859 15.9759 6.60351 15.791L10.5 11.8945L14.3965 15.791C14.5814 15.9759 14.8322 16.0798 15.0937 16.0798C15.3553 16.0798 15.6061 15.9759 15.791 15.791C15.9759 15.6061 16.0798 15.3553 16.0798 15.0937C16.0798 14.8322 15.9759 14.5814 15.791 14.3965L11.8921 10.5Z"
@@ -125,7 +132,13 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, origi
                 <path d="M17.5 6.625L8.75 15.375L4.375 11" stroke="#83C56B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <button className="rectangularButton close" onClick={onClose}>
+            <button
+              className="rectangularButton close"
+              onClick={() => {
+                onClose();
+                window.location.reload();
+              }}
+            >
               <h4>Close</h4>
               <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -171,7 +184,13 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, origi
           <div className="deletedModal">
             <h4>Request sent</h4>
             <p>A member of the staff will review your request</p>
-            <button className="rectangularButton" onClick={onClose}>
+            <button
+              className="rectangularButton"
+              onClick={() => {
+                onClose();
+                window.location.reload();
+              }}
+            >
               <h4>Close</h4>
               <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
