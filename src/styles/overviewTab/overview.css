@@ -35,6 +35,12 @@
   gap: 10px;
 }
 
+.overviewContent .activityGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .overviewContent .activityElement {
   display: flex;
   align-items: center;

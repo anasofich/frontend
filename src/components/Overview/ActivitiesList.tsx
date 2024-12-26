@@ -15,14 +15,45 @@ interface ActivitiesListProps {
 }
 
 const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
-  if (!activities || activities.length === 0) {
+  // Function to sort activities by date and time
+  const sortActivities = (a: { originalDate: string; time: string }, b: { originalDate: string; time: string }) => {
+    if (a.originalDate !== b.originalDate) {
+      return new Date(a.originalDate).getTime() - new Date(b.originalDate).getTime();
+    } else {
+      return a.time.localeCompare(b.time); // Sort by time if dates are the same
+    }
+  };
+
+  // Sort the activities
+  const sortedActivities = activities.sort(sortActivities);
+
+  // Group activities by date
+  const groupedActivities = sortedActivities.reduce((acc: Record<string, any[]>, activity) => {
+    const date = activity.originalDate;
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(activity);
+    return acc;
+  }, {} as Record<string, any[]>);
+
+  if (activities.length === 0) {
     return <p>No upcoming activities</p>;
   }
 
   return (
     <div className="activitiesList">
+      {/* <div className="activitiesList">
       {activities.map((activity) => (
         <ActivityElement key={activity._id} {...activity} />
+      ))}</div> */}
+      {Object.entries(groupedActivities).map(([date, activities]) => (
+        <div key={date} className="activityGroup">
+          <h4>{activities[0].formattedDate}</h4>
+          {activities.map((activity) => (
+            <ActivityElement key={activity._id} {...activity} />
+          ))}
+        </div>
       ))}
       <div className="showAll">
         <h4>Show all</h4>
