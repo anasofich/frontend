@@ -1,46 +1,66 @@
 import React, { useState } from "react";
+import { updateActivity, deleteActivity } from "../../services/api";
 
 interface ActivityModalProps {
-  id: string; // Unique identifier for the activity
-  date: string;
+  _id: string; // Unique identifier for the activity
+  formattedDate: string;
+  originalDate: string;
   time: string;
   title: string;
   notes: string;
   status: string; // Added for status management
   onClose: () => void;
-  onUpdateActivity: (id: string, updatedData: { title?: string; notes?: string; status?: string }) => void; // Function to update the activity
-  onDeleteActivity: (id: string) => void; // Function to delete the activity
+  onUpdateActivity: (_id: string, updatedData: { title?: string; notes?: string; status?: string }) => void; // Function to update the activity
+  onDeleteActivity: (_id: string) => void; // Function to delete the activity
 }
 
-const ActivityModal: React.FC<ActivityModalProps> = ({ id, date, time, title, notes, status, onClose, onUpdateActivity, onDeleteActivity }) => {
+const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, originalDate, time, title, notes, status, onClose, onUpdateActivity, onDeleteActivity }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showDeletedModal, setShowDeletedModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editData, setEditData] = useState({
     title,
     notes,
-    date,
-    time: "",
+    formattedDate,
+    originalDate,
+    time,
   });
   const [showDoneElement, setShowDoneElement] = useState(status === "completed");
 
   // Handle updates to the activity
-  const handleMarkAsCompleted = () => {
-    onUpdateActivity(id, { status: "completed" });
-    setShowDoneElement(true);
+  const handleMarkAsCompleted = async () => {
+    try {
+      await updateActivity(_id, { status: "completed" });
+      onUpdateActivity(_id, { status: "completed" });
+      setShowDoneElement(true);
+      console.log("Activity marked as completed", _id);
+    } catch (error) {
+      console.error("Error marking activity as completed:", error);
+    }
   };
 
-  const handleSaveEdit = () => {
-    onUpdateActivity(id, editData);
-    setShowEditModal(false);
+  const handleSaveEdit = async () => {
+    try {
+      await updateActivity(_id, editData);
+      onUpdateActivity(_id, editData);
+      setShowEditModal(false);
+      console.log("Activity updated:", _id, editData);
+    } catch (error) {
+      console.error("Error updating activity:", error);
+    }
   };
 
-  const handleDelete = () => {
-    onDeleteActivity(id);
-    setShowDeleteConfirmation(false);
-    setShowDeletedModal(true); // Show "deleted" info after deletion
-    setShowEditModal(false); // Optional: Ensure other modals are closed
-    setShowDoneElement(false); // Optional: Set done state to false if you need it
+  const handleDelete = async () => {
+    try {
+      await deleteActivity(_id);
+      onDeleteActivity(_id);
+      setShowDeleteConfirmation(false);
+      setShowDeletedModal(true);
+      setShowEditModal(false);
+      setShowDoneElement(false); // Optional: Reset completed status
+    } catch (error) {
+      console.error("Error deleting activity:", error);
+    }
   };
 
   return (
@@ -60,7 +80,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, date, time, title, no
             <button onClick={() => setShowEditModal(true)}>Edit</button>
           </div>
           <div className="date">
-            <p>{date}</p>
+            <p>{formattedDate}</p>
             <p>{time}</p>
           </div>
           <div className="notes">
@@ -175,7 +195,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ id, date, time, title, no
               <div className="dateTimeContainer">
                 <div className="dateField">
                   <h4>Date</h4>
-                  <input type="date" value={editData.date} onChange={(e) => setEditData({ ...editData, date: e.target.value })} />
+                  <input type="date" value={editData.originalDate} onChange={(e) => setEditData({ ...editData, originalDate: e.target.value })} />
                 </div>
 
                 {/* Time Field */}

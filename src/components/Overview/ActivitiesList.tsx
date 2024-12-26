@@ -3,9 +3,10 @@ import ActivityElement from "./ActivityElement";
 
 interface ActivitiesListProps {
   activities: {
-    id: string;
+    _id: string;
     icon: string;
-    date: string;
+    formattedDate: string; // Formatted date
+    originalDate: string; // Original date
     time: string;
     title: string;
     notes?: string;
@@ -21,7 +22,7 @@ const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
   return (
     <div className="activitiesList">
       {activities.map((activity) => (
-        <ActivityElement key={activity.id} {...activity} />
+        <ActivityElement key={activity._id} {...activity} />
       ))}
       <div className="showAll">
         <h4>Show all</h4>

@@ -2,43 +2,45 @@ import React, { useState } from "react";
 import ActivityModal from "./ActivityModal";
 
 interface ActivityElementProps {
-  id: string; // Unique identifier
+  _id: string; // Unique identifier
   icon: string; // Path to the icon
-  date: string; // Day (e.g., "Today")
+  formattedDate: string; // Formatted date here
+  originalDate: string; // Store original date for editing
   time: string; // Time (e.g., "12:30")
   title: string; // Activity title (e.g., "Take Naloxone")
   notes?: string; // Additional notes (optional)
   status: string; // Status of the activity (e.g., "pending")
 }
 
-const ActivityElement: React.FC<ActivityElementProps> = ({ id, icon, date, time, title, notes, status }) => {
+const ActivityElement: React.FC<ActivityElementProps> = ({ _id, icon, formattedDate, originalDate, time, title, notes, status }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Define handlers for modal actions
-  const handleUpdateActivity = (id: string, updatedData: { title?: string; notes?: string; status?: string }) => {
-    console.log("Updating activity:", id, updatedData);
+  const handleUpdateActivity = (_id: string, updatedData: { title?: string; notes?: string; status?: string }) => {
+    console.log("Updating activity:", _id, updatedData);
     // Implement the logic to update the activity
   };
 
-  const handleDeleteActivity = (id: string) => {
-    console.log("Deleting activity:", id);
+  const handleDeleteActivity = (_id: string) => {
+    console.log("Deleting activity:", _id);
     // Implement the logic to delete the activity
   };
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+    console.log("Opening modal for activity:", _id);
   };
 
   return (
     <div>
-      <div className="activityElement" key={id} onClick={handleOpenModal} style={{ cursor: "pointer" }}>
+      <div className="activityElement" key={_id} onClick={handleOpenModal} style={{ cursor: "pointer" }}>
         <div className="left">
           <div className="icon">
             <img src={icon} alt={`${title} icon`} />
           </div>
           <div className="content">
             <div className="date">
-              <span className="activityDay">{date}</span>
+              <span className="activityDay">{formattedDate}</span>
               <span className="activityTime">{time}</span>
             </div>
             <h4 className="activityTitle">{title}</h4>
@@ -53,8 +55,9 @@ const ActivityElement: React.FC<ActivityElementProps> = ({ id, icon, date, time,
       </div>
       {isModalOpen && (
         <ActivityModal
-          id={id} // Pass id as string
-          date={date}
+          _id={_id} // Pass id as string
+          formattedDate={formattedDate}
+          originalDate={originalDate}
           time={time}
           title={title}
           notes={notes ?? ""}

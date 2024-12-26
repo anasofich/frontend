@@ -5,54 +5,6 @@ import { fetchUserActivities } from "../services/api";
 const Overview: React.FC = () => {
   const [activities, setActivities] = React.useState<any[]>([]);
   const userId = "676a5112c2fadf3c1e98793c";
-  // Dummy data for activities
-  /* const activities = [
-    {
-      id: 1,
-      icon: "./media/graphics/svg/medicine.svg",
-      day: "Today",
-      time: "12:30",
-      title: "Take Naloxone",
-      notes: "Take 1 dose",
-      status: "pending",
-    },
-    {
-      id: 2,
-      icon: "./media/graphics/svg/appointment.svg",
-      day: "Tomorrow",
-      time: "09:00",
-      title: "Physical therapy",
-      notes: "Come 15 minues earlier",
-      status: "pending",
-    },
-    {
-      id: 3,
-      icon: "./media/graphics/svg/food.svg",
-      day: "Nov 3",
-      time: "8:30",
-      title: "Breakfast",
-      notes: "",
-      status: "pending",
-    },
-    {
-      id: 4,
-      icon: "./media/graphics/svg/medicine.svg",
-      day: "Nov 3",
-      time: "13:00",
-      title: "Take Citalopram",
-      notes: "Take 1/2 a dose",
-      status: "pending",
-    },
-    {
-      id: 4,
-      icon: "./media/graphics/svg/medicine.svg",
-      day: "Nov 3",
-      time: "13:00",
-      title: "Take Citalopram",
-      notes: "Take 1/2 a dose",
-      status: "pending",
-    },
-  ]; */
 
   const typeToIconMap: { [key: string]: string } = {
     appointment: "./media/graphics/svg/appointment.svg",
@@ -91,9 +43,10 @@ const Overview: React.FC = () => {
           });
         };
 
-        const formatTime24Hour = (dateString: string) => {
-          const activityDate = new Date(dateString);
-          return activityDate.toLocaleTimeString("en-US", {
+        const formatTime24Hour = (timeString: string) => {
+          // If the timeString is just time, combine it with a default date
+          const dateForTime = new Date(`1970-01-01T${timeString}`);
+          return dateForTime.toLocaleTimeString("en-US", {
             hour: "2-digit",
             minute: "2-digit",
             hour12: false,
@@ -103,8 +56,9 @@ const Overview: React.FC = () => {
         const enrichedData = data.map((activity: any) => ({
           ...activity,
           icon: typeToIconMap[activity.type] || "./media/graphics/svg/medicine.svg",
-          date: formatDate(activity.date),
-          time: formatTime24Hour(activity.date),
+          formattedDate: formatDate(activity.date),
+          originalDate: activity.date,
+          time: formatTime24Hour(activity.time),
         }));
         setActivities(enrichedData);
       } catch (error) {

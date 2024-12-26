@@ -62,7 +62,7 @@ export const createActivity = async (userId: string, activityData: CreateActivit
 
 // Update a specific activity
 export const updateActivity = async (activityId: string, activityData: Partial<CreateActivityDto>): Promise<Activity> => {
-  const response = await api.put<Activity>(`/activities/${activityId}`, activityData);
+  const response = await api.patch<Activity>(`/activities/${activityId}`, activityData);
   console.log("updateActivity", response.data);
   console.log("updateActivity activityId", activityId);
   return response.data;

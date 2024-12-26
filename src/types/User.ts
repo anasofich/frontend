@@ -5,7 +5,7 @@ export enum UserRole {
 }
 
 export interface User {
-  id: string;
+  _id: string;
   username: string;
   fullName: string;
   email: string;
@@ -24,7 +24,7 @@ export interface CreateUserDto {
 }
 
 export interface Activity {
-  id: string;
+  _id: string;
   icon: string;
   day: string;
   time: string;
