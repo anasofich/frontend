@@ -23,6 +23,7 @@
 body {
   color: var(--black);
   background: var(--light-blue);
+  overflow: hidden;
 }
 
 * {
