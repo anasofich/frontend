@@ -1,4 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { createActivity } from "../services/api";
+import { selectUser } from "../state/slices/userSlice";
+import { useSelector } from "react-redux";
 
 // Main Calendar Component
 const Calendar: React.FC = () => {
@@ -81,13 +84,15 @@ const ACTIVITY_TYPES: ActivityType[] = [
 const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = ({ close, onSubmit }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
-    activityType: "",
-    activityTitle: "",
+    type: "",
+    title: "",
     date: "",
     time: "",
     notes: "",
     status: "pending",
+    createdBy: "",
   });
+  const user = useSelector(selectUser);
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = event.target;
@@ -95,21 +100,28 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
   }
 
   const handleNext = () => {
-    if (currentStep === 1 && formData.activityType) setCurrentStep(2);
+    if (currentStep === 1 && formData.type) setCurrentStep(2);
   };
 
   const handleBack = () => setCurrentStep(1);
 
-  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("handle submit");
     console.log("formData", formData);
-    onSubmit(); // Call parent function to open confirmation modal
-    close(); // Close add activity modal
+    try {
+      await createActivity(user._id, formData);
+      console.log("Activity created successfully", formData);
+
+      onSubmit(); // Call parent function to open confirmation modal
+      close(); // Close add activity modal
+    } catch (error) {
+      console.error("Error creating activity:", error);
+    }
   };
 
   const areRequiredFieldsFilled = () => {
-    return formData.activityType && formData.activityTitle && formData.date && formData.time;
+    return formData.type && formData.title && formData.date && formData.time;
   };
 
   return (
@@ -129,7 +141,7 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
               <h3>What kind of activity do you want to add?</h3>
               <div className="activityTypes">
                 {ACTIVITY_TYPES.map((type) => (
-                  <button type="button" className={`activityType ${formData.activityType === type.key ? "selected" : ""}`} onClick={() => setFormData({ ...formData, activityType: type.key })}>
+                  <button key={Math.random()} type="button" className={`activityType ${formData.type === type.key ? "selected" : ""}`} onClick={() => setFormData({ ...formData, type: type.key })}>
                     <div className="icon">
                       <img src={type.icon} alt={type.label} />
                     </div>
@@ -137,22 +149,8 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
                   </button>
                 ))}
               </div>
-              {/* <div className="activityTypes">
-                <button type="button" className={`activityType ${formData.activityType === "food" ? "selected" : ""}`} onClick={() => setFormData({ ...formData, activityType: "food" })}>
-                  <div className="icon">
-                    <img src="media/graphics/svg/food.svg" alt="icon" />
-                  </div>
-                  <h4>Food</h4>
-                </button>
-                <button type="button" className={`activityType ${formData.activityType === "appointment" ? "selected" : ""}`} onClick={() => setFormData({ ...formData, activityType: "appointment" })}>
-                  <div className="icon">
-                    <img src="media/graphics/svg/appointment.svg" alt="icon" />
-                  </div>
-                  <h4>Appointment</h4>
-                </button>
-              </div> */}
               <div className="buttons">
-                <button type="button" className={`mainButton ${formData.activityType ? "" : "disabled"}`} onClick={handleNext}>
+                <button type="button" className={`mainButton ${formData.type ? "" : "disabled"}`} onClick={handleNext}>
                   <h4>Next</h4>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -166,9 +164,11 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
           )}
           {currentStep === 2 && (
             <div className="step2">
+              <input type="hidden" name="createdBy" value={user._id} />
+
               <div className="first">
                 <h3>What’s the activity title?</h3>
-                <input required type="text" name="activityTitle" placeholder="Write a title for your activity eg. appointment name, medicine name, etc." value={formData.activityTitle} onChange={handleInputChange} />
+                <input required type="text" name="title" placeholder="Write a title for your activity eg. appointment name, medicine name, etc." value={formData.title} onChange={handleInputChange} />
               </div>
 
               <div className="second">

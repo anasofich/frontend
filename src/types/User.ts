@@ -25,8 +25,8 @@ export interface CreateUserDto {
 
 export interface Activity {
   _id: string;
-  icon: string;
-  day: string;
+  type: string;
+  date: string;
   time: string;
   title: string;
   notes?: string;
@@ -35,8 +35,8 @@ export interface Activity {
 }
 
 export interface CreateActivityDto {
-  icon: string;
-  day: string;
+  type: string;
+  date: string;
   time: string;
   title: string;
   notes?: string;

@@ -36,11 +36,6 @@ export const fetchActivities = async (): Promise<Activity[]> => {
 };
 
 //Fetch all activities for a specific user
-/* export const fetchUserActivities = async (userId: string): Promise<any[]> => {
-  const response = await api.get(`/activities/user/${userId}`);
-  return response.data;
-}; */
-
 export const fetchUserActivities = async (userId: string): Promise<Activity[]> => {
   try {
     const response = await api.get<Activity[]>(`/activities/user/${userId}`);
@@ -54,7 +49,7 @@ export const fetchUserActivities = async (userId: string): Promise<Activity[]> =
 
 //Create a new activity for a specific user
 export const createActivity = async (userId: string, activityData: CreateActivityDto): Promise<Activity> => {
-  const response = await api.post<Activity>(`/activities?${userId}`, activityData);
+  const response = await api.post<Activity>(`/activities?userId=${userId}`, activityData);
   console.log("createActivity", response.data);
   console.log("createActivity userId", userId);
   return response.data;
