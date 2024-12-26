@@ -27,8 +27,11 @@ const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
   // Sort the activities
   const sortedActivities = activities.sort(sortActivities);
 
+  // Filter activities by status "pending"
+  const filteredActivities = sortedActivities.filter((activity) => activity.status === "pending");
+
   // Group activities by date
-  const groupedActivities = sortedActivities.reduce((acc: Record<string, any[]>, activity) => {
+  const groupedActivities = filteredActivities.reduce((acc: Record<string, any[]>, activity) => {
     const date = activity.originalDate;
     if (!acc[date]) {
       acc[date] = [];
@@ -37,8 +40,8 @@ const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
     return acc;
   }, {} as Record<string, any[]>);
 
-  if (activities.length === 0) {
-    return <p>No upcoming activities</p>;
+  if (filteredActivities.length === 0) {
+    return <p>No pending activities</p>;
   }
 
   return (
