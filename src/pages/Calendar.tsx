@@ -94,9 +94,15 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
   });
   const user = useSelector(selectUser);
 
+  const userId = user?._id;
+  if (!userId) {
+    console.error("User ID is null");
+    return;
+  }
+
   function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value || "" });
   }
 
   const handleNext = () => {
@@ -110,7 +116,7 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
     console.log("handle submit");
     console.log("formData", formData);
     try {
-      await createActivity(user._id, formData);
+      await createActivity(userId, formData);
       console.log("Activity created successfully", formData);
 
       onSubmit(); // Call parent function to open confirmation modal
@@ -164,7 +170,7 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
           )}
           {currentStep === 2 && (
             <div className="step2">
-              <input type="hidden" name="createdBy" value={user._id} />
+              <input type="hidden" name="createdBy" value={userId} />
 
               <div className="first">
                 <h3>What’s the activity title?</h3>

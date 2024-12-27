@@ -4,13 +4,31 @@ import { login } from "../../state/slices/userSlice";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate an API call
-    dispatch(login({ id: "1", name: "John Doe" })); // Replace with real user data
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+
+      console.log("API Response:", data); // Log entire API response
+      console.log("User object in response:", data.user); // Log user object
+
+      if (response.ok) {
+        console.log("Login successful:", data);
+        dispatch(login({ _id: data.user._id, fullName: data.user.fullName, username: data.user.username, email: data.user.email, role: data.user.role, photo: data.user.photo, password: data.user.password, phoneNumber: data.user.phoneNumber }));
+      } else {
+        console.error("Login failed:", data.message);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
 
   return (
@@ -20,7 +38,7 @@ const Login: React.FC = () => {
         <h4>Nursing Home Management Platform</h4>
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
-          <input required type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input required type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
           <input required type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <button type="submit" className="mainButton login">
             <h4>Login</h4>

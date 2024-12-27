@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../state/slices/userSlice";
-
 const Signup: React.FC = () => {
-  const dispatch = useDispatch();
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -11,10 +7,23 @@ const Signup: React.FC = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate an API call
-    dispatch(login({ id: "1", name: "John Doe" })); // Replace with real user data
+    try {
+      const response = await fetch("http://localhost:3000/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, username, email, phoneNumber, password, role }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Signup successful:", data);
+      } else {
+        console.error("Signup failed:", data.message);
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
   };
 
   return (
@@ -38,11 +47,14 @@ const Signup: React.FC = () => {
             <option value="">Select role</option>
             <option value="staff">Staff</option>
             <option value="resident">Resident</option>
-            <option value="family-member">Family member</option>
+            <option value="family_member">Family member</option>
           </select>
           <button type="submit" className="mainButton">
             Signup
           </button>
+          <p className="signupLink">
+            Already have an account? <a href="/login">Login</a>
+          </p>
         </form>
       </div>
     </div>

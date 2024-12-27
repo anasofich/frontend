@@ -20,6 +20,16 @@ const NavBar: React.FC = () => {
   console.log("Notifications Open:", isNotificationsOpen);
   console.log("Chat Open:", isChatOpen);
 
+  const formatRole = (role: string | undefined | null): string => {
+    if (!role) return "No Role Assigned";
+    const formattedRole = role
+      .toLowerCase()
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+    return formattedRole;
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-items">
@@ -69,11 +79,11 @@ const NavBar: React.FC = () => {
           </button>
           <div className="userInfo">
             <div className="userImage">
-              <img src={user.photo} alt="User"></img>
+              <img src={user.currentUser?.photo || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"} alt="User"></img>
             </div>
             <div className="userDetails">
-              <p className="name">{user.fullName}</p>
-              <p className="role">{user.role}</p>
+              <p className="name">{user.currentUser?.fullName}</p>
+              <p className="role">{formatRole(user.currentUser?.role)}</p>
             </div>
           </div>
         </div>
