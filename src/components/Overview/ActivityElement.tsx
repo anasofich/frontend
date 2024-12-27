@@ -5,14 +5,14 @@ interface ActivityElementProps {
   _id: string; // Unique identifier
   icon: string; // Path to the icon
   formattedDate: string; // Formatted date here
-  originalDate: string; // Store original date for editing
+  date: string; // Store original date for editing
   time: string; // Time (e.g., "12:30")
   title: string; // Activity title (e.g., "Take Naloxone")
   notes?: string; // Additional notes (optional)
   status: string; // Status of the activity (e.g., "pending")
 }
 
-const ActivityElement: React.FC<ActivityElementProps> = ({ _id, icon, formattedDate, originalDate, time, title, notes, status }) => {
+const ActivityElement: React.FC<ActivityElementProps> = ({ _id, icon, formattedDate, date, time, title, notes, status }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Define handlers for modal actions
@@ -57,7 +57,7 @@ const ActivityElement: React.FC<ActivityElementProps> = ({ _id, icon, formattedD
         <ActivityModal
           _id={_id} // Pass id as string
           formattedDate={formattedDate}
-          originalDate={originalDate}
+          date={date}
           time={time}
           title={title}
           notes={notes ?? ""}

@@ -4,7 +4,7 @@ import { updateActivity, deleteActivity } from "../../services/api";
 interface ActivityModalProps {
   _id: string; // Unique identifier for the activity
   formattedDate: string;
-  originalDate: string;
+  date: string;
   time: string;
   title: string;
   notes: string;
@@ -14,7 +14,7 @@ interface ActivityModalProps {
   onDeleteActivity: (_id: string) => void; // Function to delete the activity
 }
 
-const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, originalDate, time, title, notes, status, onClose, onUpdateActivity, onDeleteActivity }) => {
+const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, date, time, title, notes, status, onClose, onUpdateActivity, onDeleteActivity }) => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showDeletedModal, setShowDeletedModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -22,7 +22,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, origi
     title,
     notes,
     formattedDate,
-    originalDate,
+    date,
     time,
   });
   const [showDoneElement, setShowDoneElement] = useState(status === "completed");
@@ -214,7 +214,7 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, origi
               <div className="dateTimeContainer">
                 <div className="dateField">
                   <h4>Date</h4>
-                  <input type="date" value={editData.originalDate} onChange={(e) => setEditData({ ...editData, originalDate: e.target.value })} />
+                  <input type="date" value={editData.date} onChange={(e) => setEditData({ ...editData, date: e.target.value })} />
                 </div>
 
                 {/* Time Field */}

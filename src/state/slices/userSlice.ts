@@ -35,7 +35,7 @@ const initialState: UserState = {
   _id: "676a5112c2fadf3c1e98793c",
   fullName: "Maria Alba", // Replace with dynamic value from your authentication logic
   role: "Resident", // Replace with dynamic value
-  photo: "https://raw.githubusercontent.com/anasofich/frontend/refs/heads/main/public/media/images/png/maria-pp.png?token=GHSAT0AAAAAAC4G3BMT2LYQKCTOFJ4ZXHH2Z3M5V7Q",
+  photo: "https://images.unsplash.com/photo-1556889882-73ea40694a98?q=80&w=1800&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 };
 
 const userSlice = createSlice({

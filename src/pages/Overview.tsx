@@ -57,7 +57,7 @@ const Overview: React.FC = () => {
           ...activity,
           icon: typeToIconMap[activity.type] || "./media/graphics/svg/medicine.svg",
           formattedDate: formatDate(activity.date),
-          originalDate: activity.date,
+          date: activity.date,
           time: formatTime24Hour(activity.time),
         }));
         setActivities(enrichedData);

@@ -6,7 +6,7 @@ interface ActivitiesListProps {
     _id: string;
     icon: string;
     formattedDate: string; // Formatted date
-    originalDate: string; // Original date
+    date: string; // Original date
     time: string;
     title: string;
     notes?: string;
@@ -16,9 +16,9 @@ interface ActivitiesListProps {
 
 const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
   // Function to sort activities by date and time
-  const sortActivities = (a: { originalDate: string; time: string }, b: { originalDate: string; time: string }) => {
-    if (a.originalDate !== b.originalDate) {
-      return new Date(a.originalDate).getTime() - new Date(b.originalDate).getTime();
+  const sortActivities = (a: { date: string; time: string }, b: { date: string; time: string }) => {
+    if (a.date !== b.date) {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
     } else {
       return a.time.localeCompare(b.time); // Sort by time if dates are the same
     }
@@ -32,7 +32,7 @@ const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
 
   // Group activities by date
   const groupedActivities = filteredActivities.reduce((acc: Record<string, any[]>, activity) => {
-    const date = activity.originalDate;
+    const date = activity.date;
     if (!acc[date]) {
       acc[date] = [];
     }
