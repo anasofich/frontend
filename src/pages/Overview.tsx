@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import ActivitiesList from "../components/Overview/ActivitiesList";
 import { fetchUserActivities } from "../services/api";
+import { useSelector } from "react-redux";
+import { selectUser } from "../state/slices/userSlice";
 
 const Overview: React.FC = () => {
   const [activities, setActivities] = React.useState<any[]>([]);
-  const userId = "676a5112c2fadf3c1e98793c";
+  const user = useSelector(selectUser);
 
   const typeToIconMap: { [key: string]: string } = {
     appointment: "./media/graphics/svg/appointment.svg",
@@ -22,7 +24,7 @@ const Overview: React.FC = () => {
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const data = await fetchUserActivities(userId);
+        const data = await fetchUserActivities(user.currentUser?._id || "");
 
         // Get today's and tomorrow's dates
         const today = new Date();
@@ -67,13 +69,13 @@ const Overview: React.FC = () => {
     };
 
     fetchActivities();
-  }, [userId]);
+  }, [user.currentUser?._id]);
 
   return (
     <div className="overviewContent" style={{ padding: "30px" }}>
       <div className="top">
-        <p>Hello</p>
-        <h1 className="name">Maria</h1>
+        <p>Hello,</p>
+        <h1 className="name">{user.currentUser?.fullName}</h1>
       </div>
       <div className="bottom">
         <div className="upcomingActivities">

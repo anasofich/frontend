@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../state/slices/userSlice";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,6 +25,7 @@ const Login: React.FC = () => {
       if (response.ok) {
         console.log("Login successful:", data);
         dispatch(login({ _id: data.user._id, fullName: data.user.fullName, username: data.user.username, email: data.user.email, role: data.user.role, photo: data.user.photo, password: data.user.password, phoneNumber: data.user.phoneNumber }));
+        navigate("/");
       } else {
         console.error("Login failed:", data.message);
       }
