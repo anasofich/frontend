@@ -14,13 +14,22 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Login</button>
-      </form>
+    <div className="loginPage">
+      <div className="loginContainer">
+        <img src="media/graphics/svg/logo.svg" alt="Logo" className="nav-logo" />
+        <h4>Nursing Home Management Platform</h4>
+        <h2>Login</h2>
+        <form onSubmit={handleLogin}>
+          <input required type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input required type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <button type="submit" className="mainButton login">
+            <h4>Login</h4>
+          </button>
+          <p className="signupLink">
+            Don't have an account? <a href="/signup">Signup</a>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

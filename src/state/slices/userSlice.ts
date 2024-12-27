@@ -31,7 +31,7 @@ const initialState: UserState = {
   token: null,
   loading: false,
   error: null,
-  isAuthenticated: true, //toggle for testing
+  isAuthenticated: false, //toggle for testing
   _id: "676a5112c2fadf3c1e98793c",
   fullName: "Maria Alba", // Replace with dynamic value from your authentication logic
   role: "Resident", // Replace with dynamic value

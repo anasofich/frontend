@@ -1,0 +1,46 @@
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loginPage .loginContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 60px 100px;
+  background-color: var(--white);
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginPage .loginContainer form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.loginPage .loginContainer form input,
+.loginPage .loginContainer form select {
+  background-color: var(--light-grey);
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.loginPage a {
+  color: var(--main-blue);
+  text-decoration: none;
+}
+
+.loginPage a:hover {
+  text-decoration: underline;
+}
+
+.loginPage form .formGroup {
+  display: flex;
+  gap: 10px;
+}
