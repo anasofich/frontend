@@ -48,22 +48,26 @@ button.rectangularButton.close {
   border-radius: 10px;
 }
 
-.addActivityModal .activityTypes::-webkit-scrollbar {
+.addActivityModal .activityTypes::-webkit-scrollbar,
+.allActivitesModal .allActivitiesList::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-.addActivityModal .activityTypes::-webkit-scrollbar-track {
+.addActivityModal .activityTypes::-webkit-scrollbar-track,
+.allActivitesModal .allActivitiesList::-webkit-scrollbar-track {
   background: var(--light-grey);
   border-radius: 4px;
 }
 
-.addActivityModal .activityTypes::-webkit-scrollbar-thumb {
+.addActivityModal .activityTypes::-webkit-scrollbar-thumb,
+.allActivitesModal .allActivitiesList::-webkit-scrollbar-thumb {
   background: rgb(206, 209, 225);
   border-radius: 4px;
 }
 
-.addActivityModal .activityTypes::-webkit-scrollbar-thumb:hover {
+.addActivityModal .activityTypes::-webkit-scrollbar-thumb:hover,
+.allActivitesModal .allActivitiesList::-webkit-scrollbar-thumb:hover {
   background: var(--grey);
 }
 

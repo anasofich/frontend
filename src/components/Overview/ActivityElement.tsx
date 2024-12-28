@@ -10,9 +10,11 @@ interface ActivityElementProps {
   title: string; // Activity title (e.g., "Take Naloxone")
   notes?: string; // Additional notes (optional)
   status: string; // Status of the activity (e.g., "pending")
+  className?: string;
+  statusText?: string;
 }
 
-const ActivityElement: React.FC<ActivityElementProps> = ({ _id, icon, formattedDate, date, time, title, notes, status }) => {
+const ActivityElement: React.FC<ActivityElementProps> = ({ _id, icon, formattedDate, date, time, title, notes, status, className, statusText }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Define handlers for modal actions
@@ -33,7 +35,7 @@ const ActivityElement: React.FC<ActivityElementProps> = ({ _id, icon, formattedD
 
   return (
     <div>
-      <div className="activityElement" key={_id} onClick={handleOpenModal} style={{ cursor: "pointer" }}>
+      <div className={`activityElement ${className}`} key={_id} onClick={handleOpenModal} style={{ cursor: "pointer" }}>
         <div className="left">
           <div className="icon">
             <img src={icon} alt={`${title} icon`} />
@@ -44,6 +46,7 @@ const ActivityElement: React.FC<ActivityElementProps> = ({ _id, icon, formattedD
               <span className="activityTime">{time}</span>
             </div>
             <h4 className="activityTitle">{title}</h4>
+            {statusText && <p className={`activityStatus ${className}`}>{statusText}</p>}
           </div>
         </div>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

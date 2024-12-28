@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Signup: React.FC = () => {
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
@@ -6,6 +8,8 @@ const Signup: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,11 +22,14 @@ const Signup: React.FC = () => {
       const data = await response.json();
       if (response.ok) {
         console.log("Signup successful:", data);
+        navigate("/login");
       } else {
         console.error("Signup failed:", data.message);
+        setError(data.message || "An error occurred during signup.");
       }
     } catch (error) {
       console.error("Error during signup:", error);
+      setError("An unexpected error occurred. Please try again later.");
     }
   };
 
@@ -33,6 +40,7 @@ const Signup: React.FC = () => {
         <h4>Nursing Home Management Platform</h4>
         <h1>Signup</h1>
         <form onSubmit={handleSignup}>
+          {error && <div className="error-message">{error}</div>}
           <div className="formGroup">
             <input required type="text" placeholder="Full name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
             <input required type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />

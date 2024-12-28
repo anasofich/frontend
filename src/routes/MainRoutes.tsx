@@ -13,37 +13,84 @@ import NotificationsModal from "../components/Navigation/NotificationsModal";
 import ChatModal from "../components/Navigation/ChatModal";
 import Login from "../components/Auth/Login";
 import Signup from "../components/Auth/Signup";
+import PrivateRoute from "./PrivateRoute";
 
 const MainRoutes: React.FC = () => {
   const dispatch = useDispatch();
   const isNotificationsOpen = useSelector((state: RootState) => state.modal.isNotificationsOpen);
   const isChatOpen = useSelector((state: RootState) => state.modal.isChatOpen);
-  const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
+  //const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
 
   return (
     <Router>
-      {isAuthenticated ? (
-        <>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Overview />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
+      <Routes>
+        {/* Public routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-          {/* Render Modals conditionally based on Redux state */}
-          {isNotificationsOpen && <NotificationsModal onClose={() => dispatch(closeNotificationsModal())} />}
-          {isChatOpen && <ChatModal onClose={() => dispatch(closeChatModal())} />}
-        </>
-      ) : (
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      )}
+        {/* Protected routes */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <>
+                <NavBar />
+                <Overview />
+              </>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/calendar"
+          element={
+            <PrivateRoute>
+              <>
+                <NavBar />
+                <Calendar />
+              </>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/community"
+          element={
+            <PrivateRoute>
+              <>
+                <NavBar />
+                <Community />
+              </>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <>
+                <NavBar />
+                <Profile />
+              </>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <PrivateRoute>
+              <>
+                <NavBar />
+                <Settings />
+              </>
+            </PrivateRoute>
+          }
+        />
+        {/* Redirect any other route to login */}
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+
+      {/* Render Modals conditionally */}
+      {isNotificationsOpen && <NotificationsModal onClose={() => dispatch(closeNotificationsModal())} />}
+      {isChatOpen && <ChatModal onClose={() => dispatch(closeChatModal())} />}
     </Router>
   );
 };

@@ -8,9 +8,11 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError(null);
     try {
       const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
@@ -20,17 +22,32 @@ const Login: React.FC = () => {
       const data = await response.json();
 
       console.log("API Response:", data); // Log entire API response
+      console.log("Local Storage after login:", localStorage.getItem("user"));
       console.log("User object in response:", data.user); // Log user object
 
       if (response.ok) {
         console.log("Login successful:", data);
-        dispatch(login({ _id: data.user._id, fullName: data.user.fullName, username: data.user.username, email: data.user.email, role: data.user.role, photo: data.user.photo, password: data.user.password, phoneNumber: data.user.phoneNumber }));
+        dispatch(
+          login({
+            _id: data.user._id,
+            fullName: data.user.fullName,
+            username: data.user.username,
+            email: data.user.email,
+            role: data.user.role,
+            photo: data.user.photo,
+            password: data.user.password,
+            phoneNumber: data.user.phoneNumber,
+            activities: data.user.activities,
+          })
+        );
         navigate("/");
       } else {
         console.error("Login failed:", data.message);
+        setError(data.message || "Invalid username or password.");
       }
     } catch (error) {
       console.error("Error during login:", error);
+      setError("An unexpected error occurred. Please try again later.");
     }
   };
 
@@ -41,6 +58,7 @@ const Login: React.FC = () => {
         <h4>Nursing Home Management Platform</h4>
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
+          {error && <div className="error-message">{error}</div>}
           <input required type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
           <input required type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <button type="submit" className="mainButton login">

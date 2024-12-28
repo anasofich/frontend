@@ -1,0 +1,25 @@
+.profileTabContent {
+  padding: 30px;
+}
+
+.profileTabContent .profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.profileTabContent .profilePhoto {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileInfo h4 {
+  color: var(--grey);
+}

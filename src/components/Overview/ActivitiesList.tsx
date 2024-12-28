@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import ActivityElement from "./ActivityElement";
+import AllActivitiesModal from "./AllActivitiesModal";
 
 interface ActivitiesListProps {
   activities: {
@@ -15,6 +16,16 @@ interface ActivitiesListProps {
 }
 
 const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowAllClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   // Function to sort activities by date and time
   const sortActivities = (a: { date: string; time: string }, b: { date: string; time: string }) => {
     if (a.date !== b.date) {
@@ -24,14 +35,18 @@ const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
     }
   };
 
-  // Sort the activities
-  const sortedActivities = activities.sort(sortActivities);
+  // Filter activities that are not older than the current date/time
+  const currentDate = new Date();
+  const filteredActivities = activities.filter((activity) => {
+    const activityDateTime = new Date(`${activity.date}T${activity.time}`);
+    return activityDateTime >= currentDate && activity.status === "pending";
+  });
 
-  // Filter activities by status "pending"
-  const filteredActivities = sortedActivities.filter((activity) => activity.status === "pending");
+  // Sort the activities
+  const sortedActivities = filteredActivities.sort(sortActivities);
 
   // Group activities by date
-  const groupedActivities = filteredActivities.reduce((acc: Record<string, any[]>, activity) => {
+  const groupedActivities = sortedActivities.reduce((acc: Record<string, any[]>, activity) => {
     const date = activity.date;
     if (!acc[date]) {
       acc[date] = [];
@@ -58,7 +73,7 @@ const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
           ))}
         </div>
       ))}
-      <div className="showAll">
+      <button className="showAll" onClick={handleShowAllClick}>
         <h4>Show all</h4>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -66,7 +81,8 @@ const ActivitiesList: React.FC<ActivitiesListProps> = ({ activities }) => {
             fill="#898890"
           />
         </svg>
-      </div>
+      </button>
+      {showModal && <AllActivitiesModal activities={activities} onClose={handleCloseModal} />}
     </div>
   );
 };

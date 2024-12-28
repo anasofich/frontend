@@ -1,5 +1,6 @@
 .activityModal,
-.editModal {
+.editModal,
+.allActivitesModal {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,7 +21,8 @@ button.rectangularButton.close {
 }
 
 .activityModal .modalContent,
-.editModal .modalContent {
+.editModal .modalContent,
+.allActivitesModal .modalContent {
   background: var(--light-blue);
   padding: 80px;
   border-radius: 15px;
@@ -141,4 +143,30 @@ button.rectangularButton {
 .editModal .dateField,
 .timeField {
   flex: 1;
+}
+
+/*ALL ACTIVITIES*/
+
+.allActivitesModal .pastActivity {
+  opacity: 0.5; /* Optional: Adjust opacity for styling */
+}
+
+.allActivitesModal .activityStatus.completed {
+  color: green;
+}
+
+.allActivitesModal .activityStatus.pending {
+  color: orange;
+}
+
+.allActivitesModal .activityStatus.missed {
+  color: red;
+}
+
+.allActivitesModal .allActivitiesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 55vh;
+  overflow-y: scroll;
 }
