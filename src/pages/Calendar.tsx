@@ -94,7 +94,7 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
   });
   const user = useSelector(selectUser);
 
-  const userId = user?._id;
+  const userId = user.currentUser?._id;
   if (!userId) {
     console.error("User ID is null");
     return;

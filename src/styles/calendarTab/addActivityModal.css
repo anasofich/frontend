@@ -37,9 +37,11 @@ button.rectangularButton.close {
 
 .addActivityModal .activityTypes {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   gap: 8px;
   height: 52vh;
+  width: 100%;
   overflow-y: scroll;
   background-color: var(--light-grey);
   padding: 15px;
@@ -73,7 +75,6 @@ button.rectangularButton.close {
   border: none;
   border-radius: 6px;
   padding: 10px 20px;
-  width: max-content;
 }
 
 .activityType.selected {

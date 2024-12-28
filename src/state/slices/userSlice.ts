@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-/* import { fetchUser } from "../../services/api";
- */
+
 interface UserState {
   currentUser: User | null;
   token: string | null;
@@ -37,7 +36,7 @@ const initialState: UserState = {
   fullName: null,
   role: null,
   email: null,
-  photo: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
+  photo: null,
 };
 
 const userSlice = createSlice({
