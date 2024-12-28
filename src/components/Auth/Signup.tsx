@@ -34,7 +34,7 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="loginPage">
+    <div className="loginPage signupPage">
       <div className="loginContainer">
         <img src="media/graphics/svg/logo.svg" alt="Logo" className="nav-logo" />
         <h4>Nursing Home Management Platform</h4>
