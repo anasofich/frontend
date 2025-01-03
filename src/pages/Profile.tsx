@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
         </div>
         <h3>{currentUser.fullName}</h3>
         <h4>{formatRole(currentUser?.role)}</h4>
-        <button className="rectangularButton" onClick={handleLogout}>
+        <button className="rectangularButton logout" onClick={handleLogout}>
           Logout
         </button>
       </div>

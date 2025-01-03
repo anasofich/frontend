@@ -23,3 +23,7 @@
 .profileInfo h4 {
   color: var(--grey);
 }
+
+.profileInfo .logout {
+  color: var(--red);
+}
