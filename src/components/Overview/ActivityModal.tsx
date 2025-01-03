@@ -207,8 +207,8 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, date,
           <div className="editModal">
             <div className="modalContent">
               <h3>Edit Activity</h3>
+              <h4>Title</h4>
               <input type="text" value={editData.title} onChange={(e) => setEditData({ ...editData, title: e.target.value })} placeholder="Edit title" />
-              <textarea value={editData.notes} onChange={(e) => setEditData({ ...editData, notes: e.target.value })} placeholder="Edit notes"></textarea>
 
               {/* Date Field */}
               <div className="dateTimeContainer">
@@ -223,6 +223,9 @@ const ActivityModal: React.FC<ActivityModalProps> = ({ _id, formattedDate, date,
                   <input type="time" value={editData.time} onChange={(e) => setEditData({ ...editData, time: e.target.value })} />
                 </div>
               </div>
+
+              <h4>Notes</h4>
+              <textarea value={editData.notes} onChange={(e) => setEditData({ ...editData, notes: e.target.value })} placeholder="Edit notes"></textarea>
 
               <div className="modalActions">
                 <button className="rectangularButton" onClick={() => setShowEditModal(false)}>
