@@ -50,8 +50,8 @@ const AllActivitiesModal: React.FC<ActivityModalProps> = ({ activities, onClose 
                 <ActivityElement
                   key={activity._id}
                   {...activity}
-                  className="pastActivity" // Apply pastActivity class
-                  statusText={activity.status === "completed" ? "completed" : "missed"} // Show status accordingly
+                  className={activity.status === "pending" && new Date(activity.date) < currentDate ? "pastActivity missed" : "pastActivity"}
+                  statusText={activity.status === "completed" ? "completed" : "missed"}
                 />
               ))}
           </div>

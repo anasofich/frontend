@@ -3,15 +3,16 @@
 }
 
 .calendarTabContent .top {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   align-items: center;
   gap: 10px;
 }
 
 .calendarTabContent .top .left {
   display: flex;
-  gap: 540px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .calendarTabContent .top .left .buttons {
@@ -21,11 +22,182 @@
 
 .calendarTabContent .icon {
   background-color: var(--blue);
-  padding: 17px;
   border-radius: 100px;
+  width: 55px;
+  height: 55px;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendarTabContent .icon.left {
+  width: 90px;
 }
 
 .calendarTabContent .icon.right {
   background-color: var(--main-blue);
+}
+
+.calendarTabContent .top .rightSide {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.calendarTabContent .bottom {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  margin-top: 30px;
+  gap: 10px;
+}
+
+.calendarTabContent .calendarMonth {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.calendarTabContent .calendarHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  padding: 0.5rem 0;
+  background-color: var(--blue);
+  border-radius: 6px;
+}
+
+.calendarTabContent .calendarHeaderCell {
+  padding: 0.5rem;
+}
+
+.calendarTabContent .calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendarTabContent .calendarDay {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 10px;
+  height: 80px;
+  border: 1px solid var(--light-grey);
+  background-color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.calendarTabContent .calendarDay:hover {
+  background-color: var(--light-grey);
+  transform: scale(1.05);
+}
+
+.calendarTabContent .calendarDay.selected {
+  background-color: var(--turquoise);
+  color: var(--white);
+  border-radius: 6px;
+}
+
+.calendarDay span.today {
+  background-color: var(--main-blue); /* Gold color for the current day */
+  border-radius: 2px; /* Makes it a circle */
+  padding: 5px;
+  color: var(--white); /* Contrast text color */
+}
+
+.calendarTabContent .calendarEmptyCell {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+
+.calendarTabContent .icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 0.5rem;
+}
+
+.calendarTabContent .activityBg {
+  background-color: var(--blue);
+  border-radius: 100px;
+  width: 20px;
+  height: 20px;
+}
+
+.calendarTabContent .icons img {
+  width: 100%;
+  padding: 4px;
+}
+
+.calendarTabContent .dayOverview {
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 15px;
+  height: 70vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.calendarTabContent .dayActivities {
+  background-color: var(--light-blue);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calendarTabContent .bottom .activityElement {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--white);
+  border-radius: 10px;
+}
+
+.calendarTabContent .bottom .activityElement .left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.calendarTabContent .bottom .icon {
+  background-color: var(--blue);
+  padding: 17px;
+  border-radius: 100px;
+}
+
+.calendarTabContent .notes {
+  background-color: var(--light-blue);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calendarTabContent .notes textarea {
+  background-color: transparent;
+  padding: 10px;
+  border: none;
+  height: 60px;
+}
+
+.calendarTabContent .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendarTabContent .addActivityButton {
+  display: flex;
+  gap: 6px;
+  border: none;
+  align-items: center;
+  background-color: transparent;
 }

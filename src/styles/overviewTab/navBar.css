@@ -59,6 +59,11 @@ button.nav-button {
   background-color: var(--white);
 }
 
+.userInfoLink {
+  text-decoration: none;
+  color: var(--back);
+}
+
 .userInfo {
   display: flex;
   align-items: center;

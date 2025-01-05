@@ -1,18 +1,36 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { createActivity, fetchUserActivities } from "../services/api";
-import { selectUser } from "../state/slices/userSlice";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import ActivityElement from "../Overview/ActivityElement";
+import { createActivity } from "../../services/api";
 import { useSelector } from "react-redux";
-import CalendarMonth from "../components/Calendar/CalendarMonth";
-import DayOverview from "../components/Calendar/DayOverview";
+import { selectUser } from "../../state/slices/userSlice";
 
-// Main Calendar Component
-const Calendar: React.FC = () => {
+const typeToIconMap: { [key: string]: string } = {
+  appointment: "./media/graphics/svg/appointment.svg",
+  bloodCell: "./media/graphics/svg/blood-cell.svg",
+  food: "./media/graphics/svg/food.svg",
+  glucose: "./media/graphics/svg/glucose.svg",
+  heart: "./media/graphics/svg/heart.svg",
+  medicine: "./media/graphics/svg/medicine.svg",
+  toilet: "./media/graphics/svg/toilet.svg",
+  water: "./media/graphics/svg/water.svg",
+  weight: "./media/graphics/svg/weight.svg",
+  exercise: "./media/graphics/svg/exercise.svg",
+};
+
+interface DayOverviewProps {
+  selectedDay: Date;
+  activities: any[];
+}
+
+const getIcon = (type: string, title: string, icon?: string) => {
+  if (icon) return icon;
+  return typeToIconMap[type] || typeToIconMap[title];
+};
+
+const DayOverview: React.FC<DayOverviewProps> = ({ selectedDay, activities }) => {
   const [isAddActivityModalOpen, setAddActivityModalOpen] = useState(false);
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(new Date());
-  const [activities, setActivities] = useState<any[]>([]);
-  const user = useSelector(selectUser);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const dayActivities = activities.filter((activity) => new Date(activity.date).toDateString() === selectedDay.toDateString());
 
   const openAddActivityModal = () => setAddActivityModalOpen(true);
   const closeAddActivityModal = () => setAddActivityModalOpen(false);
@@ -20,83 +38,51 @@ const Calendar: React.FC = () => {
   const openConfirmationModal = () => setConfirmationModalOpen(true);
   const closeConfirmationModal = () => setConfirmationModalOpen(false);
 
-  useEffect(() => {
-    const fetchActivities = async () => {
-      try {
-        const data = await fetchUserActivities(user.currentUser?._id || "");
-        setActivities(data);
-      } catch (error) {
-        console.error("Error fetching activities:", error);
-      }
-    };
-
-    fetchActivities();
-  }, [user.currentUser?._id]);
-
-  const handlePrevMonth = () => {
-    const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-    setCurrentDate(newDate);
-  };
-
-  const handleNextMonth = () => {
-    const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
-    setCurrentDate(newDate);
-  };
-
-  const formatMonthYear = (date: Date) => {
-    return date.toLocaleDateString("en-US", {
-      month: "long",
-      year: "numeric",
-    });
-  };
-
   return (
-    <div className="calendarTabContent">
-      <div className="top">
-        <div className="left">
-          <h1>{formatMonthYear(currentDate)}</h1>
-          <div className="buttons">
-            <button className="icon" onClick={handlePrevMonth}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M16.62 2.98979C16.5039 2.87338 16.366 2.78103 16.2141 2.71801C16.0622 2.655 15.8994 2.62256 15.735 2.62256C15.5706 2.62256 15.4078 2.655 15.2559 2.71801C15.1041 2.78103 14.9661 2.87338 14.85 2.98979L6.54 11.2998C6.4473 11.3923 6.37375 11.5022 6.32357 11.6232C6.27339 11.7441 6.24756 11.8738 6.24756 12.0048C6.24756 12.1358 6.27339 12.2654 6.32357 12.3864C6.37375 12.5074 6.4473 12.6173 6.54 12.7098L14.85 21.0198C15.34 21.5098 16.13 21.5098 16.62 21.0198C17.11 20.5298 17.11 19.7398 16.62 19.2498L9.38 11.9998L16.63 4.74979C17.11 4.26979 17.11 3.46979 16.62 2.98979Z"
-                  fill="#2055F0"
-                />
-              </svg>
-            </button>
+    <div className="dayOverview">
+      <div className="header">
+        <h2>{selectedDay.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}</h2>
+        <button className="addActivityButton" onClick={openAddActivityModal}>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.49967 3.95837V15.0417M3.95801 9.50004H15.0413" stroke="#202124" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          Add activity
+        </button>
+      </div>
 
-            <button className="icon right" onClick={handleNextMonth}>
-              <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M6.94706 18.8528C6.701 18.6066 6.56277 18.2729 6.56277 17.9248C6.56277 17.5768 6.701 17.243 6.94706 16.9969L13.4439 10.5L6.94706 4.00315C6.70797 3.75561 6.57568 3.42407 6.57867 3.07994C6.58166 2.7358 6.7197 2.40661 6.96305 2.16326C7.20639 1.91991 7.53558 1.78188 7.87972 1.77889C8.22385 1.7759 8.55539 1.90819 8.80293 2.14728L16.2277 9.57209C16.4738 9.81822 16.612 10.152 16.612 10.5C16.612 10.8481 16.4738 11.1818 16.2277 11.428L8.80293 18.8528C8.5568 19.0988 8.22302 19.2371 7.87499 19.2371C7.52697 19.2371 7.19319 19.0988 6.94706 18.8528Z"
-                  fill="#DEE6FD"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div className="rightSide">
-          <button className="mainButton" onClick={openAddActivityModal}>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M5.01 15.0002H17.5V3.33343C17.5 2.8914 17.3244 2.46747 17.0118 2.15491C16.6993 1.84234 16.2754 1.66675 15.8333 1.66675H5C3.995 1.66675 2.5 2.33259 2.5 4.16677V15.8335C2.5 17.6677 3.995 18.3336 5 18.3336H17.5V16.6669H5.01C4.625 16.6569 4.16667 16.5044 4.16667 15.8335C4.16667 15.1627 4.625 15.0102 5.01 15.0002ZM6.66667 5.00011H14.1667V6.6668H6.66667V5.00011Z"
-                fill="white"
-              />
-            </svg>
-            <h4>Add activity</h4>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 3.75L9 14.25ZM3.75 9L14.25 9Z" fill="white" />
-              <path d="M9 3.75L9 14.25M3.75 9L14.25 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </button>
-        </div>
-      </div>
-      {isAddActivityModalOpen && <AddActivityModal close={closeAddActivityModal} onSubmit={openConfirmationModal} />}
+      {isAddActivityModalOpen && <AddActivityModal close={closeAddActivityModal} onSubmit={openConfirmationModal} selectedDay={selectedDay} />}
       {isConfirmationModalOpen && <ConfirmationModal close={closeConfirmationModal} />}
-      <div className="bottom">
-        <CalendarMonth selectedDay={selectedDay} onSelectDay={setSelectedDay} currentDate={currentDate} />
-        <DayOverview selectedDay={selectedDay} activities={activities} />
-      </div>
+
+      {dayActivities.length > 0 ? (
+        <div className="dayActivities">
+          <h4>Activities</h4>
+          {dayActivities.map((activity) => (
+            <div key={activity._id}>
+              <ActivityElement
+                _id={activity._id}
+                icon={getIcon(activity.type, activity.title)}
+                formattedDate={selectedDay.toLocaleDateString()}
+                date={activity.date}
+                time={activity.time}
+                title={activity.title}
+                notes={activity.notes || ""}
+                status={activity.status}
+                className={activity.status}
+                statusText={activity.status === "pending" ? "Pending" : "Completed"} // Customize as needed
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="dayActivities">
+          <h4>Activities</h4>
+          <p>No activities for this day.</p>
+        </div>
+      )}
+      <form className="notes">
+        <h4>Notes</h4>
+        <textarea placeholder="Add notes..." />
+      </form>
     </div>
   );
 };
@@ -121,12 +107,12 @@ const ACTIVITY_TYPES: ActivityType[] = [
   { key: "exercise", label: "Exercise", icon: "media/graphics/svg/exercise.svg" },
 ];
 
-const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = ({ close, onSubmit }) => {
+const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void; selectedDay: Date }> = ({ close, onSubmit, selectedDay }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     type: "",
     title: "",
-    date: "",
+    date: selectedDay.toISOString().split("T")[0],
     time: "",
     notes: "",
     status: "pending",
@@ -155,6 +141,11 @@ const AddActivityModal: React.FC<{ close: () => void; onSubmit: () => void }> = 
     event.preventDefault();
     console.log("handle submit");
     console.log("formData", formData);
+    if (!formData.title || !formData.type) {
+      console.error("Title or type missing");
+      return;
+    }
+
     try {
       await createActivity(userId, formData);
       console.log("Activity created successfully", formData);
@@ -286,4 +277,4 @@ const ConfirmationModal: React.FC<{ close: () => void }> = ({ close }) => (
   </div>
 );
 
-export default Calendar;
+export default DayOverview;

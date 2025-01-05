@@ -77,15 +77,17 @@ const NavBar: React.FC = () => {
           >
             <div className="nav-icon"></div>
           </button>
-          <div className="userInfo">
-            <div className="userImage">
-              <img src={user.currentUser?.photo || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"} alt="User"></img>
+          <Link to="/profile" className="userInfoLink" onClick={() => handleNavClick("/profile")}>
+            <div className="userInfo">
+              <div className="userImage">
+                <img src={user.currentUser?.photo || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"} alt="User"></img>
+              </div>
+              <div className="userDetails">
+                <p className="name">{user.currentUser?.fullName}</p>
+                <p className="role">{formatRole(user.currentUser?.role)}</p>
+              </div>
             </div>
-            <div className="userDetails">
-              <p className="name">{user.currentUser?.fullName}</p>
-              <p className="role">{formatRole(user.currentUser?.role)}</p>
-            </div>
-          </div>
+          </Link>
         </div>
       </div>
     </nav>

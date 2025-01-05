@@ -148,11 +148,15 @@ button.rectangularButton {
 /*ALL ACTIVITIES*/
 
 .allActivitesModal .pastActivity {
-  opacity: 0.5; /* Optional: Adjust opacity for styling */
+  background-color: var(--light-grey);
+}
+
+.allActivitesModal .pastActivity.missed {
+  background-color: var(--light-red);
 }
 
 .allActivitesModal .activityStatus.completed {
-  color: green;
+  color: var(--green);
 }
 
 .allActivitesModal .activityStatus.pending {
@@ -160,7 +164,7 @@ button.rectangularButton {
 }
 
 .allActivitesModal .activityStatus.missed {
-  color: red;
+  color: var(--red);
 }
 
 .allActivitesModal .allActivitiesList {
