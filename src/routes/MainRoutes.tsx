@@ -20,6 +20,7 @@ const MainRoutes: React.FC = () => {
   const isNotificationsOpen = useSelector((state: RootState) => state.modal.isNotificationsOpen);
   const isChatOpen = useSelector((state: RootState) => state.modal.isChatOpen);
   //const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
+  const user = useSelector((state: RootState) => state.user);
 
   return (
     <Router>
@@ -33,10 +34,24 @@ const MainRoutes: React.FC = () => {
           path="/"
           element={
             <PrivateRoute>
-              <>
-                <NavBar />
-                <Overview />
-              </>
+              {user.role === "resident" ? (
+                <>
+                  <NavBar />
+                  <Overview />
+                </>
+              ) : user.role === "staff" ? (
+                <>
+                  <NavBar />
+                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                </>
+              ) : user.role === "family_member" ? (
+                <>
+                  <NavBar />
+                  <div>Family Member Interface</div> {/* Replace with your family member components */}
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )}
             </PrivateRoute>
           }
         />
@@ -44,10 +59,24 @@ const MainRoutes: React.FC = () => {
           path="/calendar"
           element={
             <PrivateRoute>
-              <>
-                <NavBar />
-                <Calendar />
-              </>
+              {user.role === "resident" ? (
+                <>
+                  <NavBar />
+                  <Calendar />
+                </>
+              ) : user.role === "staff" ? (
+                <>
+                  <NavBar />
+                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                </>
+              ) : user.role === "family" ? (
+                <>
+                  <NavBar />
+                  <div>Family Member Interface</div> {/* Replace with your family member components */}
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )}
             </PrivateRoute>
           }
         />
@@ -55,10 +84,24 @@ const MainRoutes: React.FC = () => {
           path="/community"
           element={
             <PrivateRoute>
-              <>
-                <NavBar />
-                <Community />
-              </>
+              {user.role === "resident" ? (
+                <>
+                  <NavBar />
+                  <Community />
+                </>
+              ) : user.role === "staff" ? (
+                <>
+                  <NavBar />
+                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                </>
+              ) : user.role === "family" ? (
+                <>
+                  <NavBar />
+                  <div>Family Member Interface</div> {/* Replace with your family member components */}
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )}
             </PrivateRoute>
           }
         />
@@ -66,10 +109,24 @@ const MainRoutes: React.FC = () => {
           path="/profile"
           element={
             <PrivateRoute>
-              <>
-                <NavBar />
-                <Profile />
-              </>
+              {user.role === "resident" ? (
+                <>
+                  <NavBar />
+                  <Profile />
+                </>
+              ) : user.role === "staff" ? (
+                <>
+                  <NavBar />
+                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                </>
+              ) : user.role === "family" ? (
+                <>
+                  <NavBar />
+                  <div>Family Member Interface</div> {/* Replace with your family member components */}
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )}
             </PrivateRoute>
           }
         />
@@ -77,10 +134,24 @@ const MainRoutes: React.FC = () => {
           path="/settings"
           element={
             <PrivateRoute>
-              <>
-                <NavBar />
-                <Settings />
-              </>
+              {user.role === "resident" ? (
+                <>
+                  <NavBar />
+                  <Settings />
+                </>
+              ) : user.role === "staff" ? (
+                <>
+                  <NavBar />
+                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                </>
+              ) : user.role === "family" ? (
+                <>
+                  <NavBar />
+                  <div>Family Member Interface</div> {/* Replace with your family member components */}
+                </>
+              ) : (
+                <Navigate to="/login" />
+              )}
             </PrivateRoute>
           }
         />

@@ -8,12 +8,9 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
-  const isAuthenticated = useSelector((state: RootState) => {
-    console.log("IsAuthenticated in PrivateRoute:", state.user.isAuthenticated);
-    return state.user.isAuthenticated;
-  });
+  const user = useSelector((state: RootState) => state.user);
 
-  if (!isAuthenticated) {
+  if (!user.isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
