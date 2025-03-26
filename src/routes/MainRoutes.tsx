@@ -14,6 +14,7 @@ import ChatModal from "../components/Navigation/ChatModal";
 import Login from "../components/Auth/Login";
 import Signup from "../components/Auth/Signup";
 import PrivateRoute from "./PrivateRoute";
+import OverviewStaff from "../pages/OverviewStaff";
 
 const MainRoutes: React.FC = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const MainRoutes: React.FC = () => {
               ) : user.role === "staff" ? (
                 <>
                   <NavBar />
-                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                  <OverviewStaff />
                 </>
               ) : user.role === "family_member" ? (
                 <>
@@ -67,7 +68,7 @@ const MainRoutes: React.FC = () => {
               ) : user.role === "staff" ? (
                 <>
                   <NavBar />
-                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                  <Calendar />
                 </>
               ) : user.role === "family" ? (
                 <>
@@ -92,7 +93,7 @@ const MainRoutes: React.FC = () => {
               ) : user.role === "staff" ? (
                 <>
                   <NavBar />
-                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                  <Community />
                 </>
               ) : user.role === "family" ? (
                 <>
@@ -117,7 +118,7 @@ const MainRoutes: React.FC = () => {
               ) : user.role === "staff" ? (
                 <>
                   <NavBar />
-                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                  <Profile />
                 </>
               ) : user.role === "family" ? (
                 <>
@@ -142,7 +143,7 @@ const MainRoutes: React.FC = () => {
               ) : user.role === "staff" ? (
                 <>
                   <NavBar />
-                  <div>Staff Interface</div> {/* Replace with your staff-specific components */}
+                  <Settings />
                 </>
               ) : user.role === "family" ? (
                 <>
