@@ -74,6 +74,8 @@
 .calendarTabContent .calendarGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  height: 420px;
+  overflow-y: scroll;
 }
 
 .calendarTabContent .calendarDay {
